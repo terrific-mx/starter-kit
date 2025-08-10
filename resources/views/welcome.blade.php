@@ -5,8 +5,12 @@
     </head>
     <body>
         <header class="sticky flex justify-end p-6 gap-4">
-            <flux:button variant="subtle" size="sm">{{ __('Login') }}</flux:button>
-            <flux:button variant="primary" color="amber" size="sm">{{ __('Get Started') }}</flux:button>
+            @auth
+                <flux:button :href="route('dashboard')" variant="primary" color="amber" size="sm" wire:navigate>{{ __('Dashboard') }}</flux:button>
+            @else
+                <flux:button :href="route('login')" variant="subtle" size="sm" wire:navigate>{{ __('Login') }}</flux:button>
+                <flux:button :href="route('register')" variant="primary" color="amber" size="sm" wire:navigate>{{ __('Get Started') }}</flux:button>
+            @endauth
         </header>
 
         <main class="
@@ -114,8 +118,8 @@
             </flux:card>
 
             <div class="mt-64 flex items-center justify-between text-zinc-400">
-                <p class="text-sm"><span class="font-medium">flowpilot</span>.com</p>
-                <p class="text-sm">por <span class="font-medium">Oliver Servín</span></p>
+                <p class="text-sm"><strong class="font-medium">flowpilot</strong>.com</p>
+                <p class="text-sm">por <strong class="font-medium">Oliver Servín</strong></p>
             </div>
         </main>
     </body>
