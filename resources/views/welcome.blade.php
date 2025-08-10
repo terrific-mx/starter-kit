@@ -4,9 +4,13 @@
         @include('partials.head')
     </head>
     <body>
-        <main class="mx-auto mb-8 max-w-[740px] px-4 mt-20">
-            <h1 class="text-center font-medium text-5xl tracking-tight">How do you craft animations that feel right?</h1>
-            <p class="text-center text-xl max-w-lg mx-auto mt-6">Learn the theory and practice behind great animations with this interactive learning experience.</p>
+        <main class="
+            mx-auto mb-8 max-w-[740px] px-4 mt-20
+            [&>h1]:text-center [&>h1]:font-medium [&>h1]:text-5xl [&>h1]:tracking-tight
+            [&>[data-lead]]:text-center [&>[data-lead]]:text-xl
+        ">
+            <h1>How do you craft animations that feel right?</h1>
+            <p class="max-w-lg mx-auto mt-6" data-lead>Learn the theory and practice behind great animations with this interactive learning experience.</p>
             <div class="mt-6 text-center">
                 <span class="text-sm">Emil Kowalski</span>
             </div>
