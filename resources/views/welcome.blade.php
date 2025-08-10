@@ -66,7 +66,7 @@
                 There’s no credit card required, and you’ll discover how easy it is to boost productivity and streamline your workflow from day one.
             </p>
 
-            <flux:card class="max-w-xl mx-auto mt-48">
+            <flux:card class="max-w-xl mx-auto mt-20">
                 <h2 class="text-2xl font-medium tracking-tight text-zinc-950 text-center mt-2">Simple, Transparent Pricing</h2>
                 <p class="text-center mt-4">Choose a plan that fits your team and get started with confidence—no hidden fees, ever.</p>
                 <ul class="mt-9 gap-3 md:grid md:grid-cols-2 md:gap-6 text-sm">
@@ -107,6 +107,11 @@
                     Get started now
                 </flux:button>
             </flux:card>
+
+            <div class="mt-64 flex items-center justify-between text-zinc-400">
+                <p class="text-sm"><span class="font-medium">flowpilot</span>.com</p>
+                <p class="text-sm">por <span class="font-medium">Oliver Servín</span></p>
+            </div>
         </main>
     </body>
 </html>
