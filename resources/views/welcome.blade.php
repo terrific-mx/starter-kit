@@ -72,19 +72,19 @@
                 <ul class="mt-9 gap-3 md:grid md:grid-cols-2 md:gap-6 text-sm">
                     <li class="flex gap-2">
                         <flux:icon.check-circle variant="mini" class="text-green-500" />
-                        Unlimited workflows and automations
+                        Unlimited workflows
                     </li>
                     <li class="flex gap-2">
                         <flux:icon.check-circle variant="mini" class="text-green-500" />
-                        Real-time team collaboration
+                        Real-time collaboration
                     </li>
                     <li class="flex gap-2">
                         <flux:icon.check-circle variant="mini" class="text-green-500" />
-                        Seamless integrations with popular tools
+                        Seamless integrations
                     </li>
                     <li class="flex gap-2">
                         <flux:icon.check-circle variant="mini" class="text-green-500" />
-                        Advanced analytics and reporting
+                        Advanced analytics
                     </li>
                     <li class="flex gap-2">
                         <flux:icon.check-circle variant="mini" class="text-green-500" />
@@ -92,18 +92,18 @@
                     </li>
                     <li class="flex gap-2">
                         <flux:icon.check-circle variant="mini" class="text-green-500" />
-                        Customizable user roles and permissions
+                        Custom user roles
                     </li>
                     <li class="flex gap-2">
                         <flux:icon.check-circle variant="mini" class="text-green-500" />
-                        Secure cloud infrastructure
+                        Secure cloud hosting
                     </li>
                     <li class="flex gap-2">
                         <flux:icon.check-circle variant="mini" class="text-green-500" />
-                        14-day free trial, no credit card required
+                        14-day free trial
                     </li>
                 </ul>
-                <flux:button variant="primary" color="amber" class="mt-8 w-full text-base!">
+                <flux:button variant="primary" color="amber" class="mt-9 w-full text-base!">
                     Get started now
                 </flux:button>
             </flux:card>
