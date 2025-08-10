@@ -6,23 +6,25 @@
     <body>
         <main class="
             mx-auto mb-8 max-w-[740px] px-4 mt-20
-            [&>h1]:text-center [&>h1]:font-medium [&>h1]:text-5xl [&>h1]:tracking-tight
-            [&>[data-lead]]:text-center [&>[data-lead]]:text-xl [&>[data-lead]]:text-zinc-900
-            [&>p]:text-lg [&>p]:text-zinc-700
-            [&>h2]:font-medium [&>h2]:tracking-tight [&>h2]:text-2xl
+            text-zinc-700
+            [&>h1]:text-center [&>h1]:font-medium [&>h1]:text-5xl [&>h1]:tracking-tight [&>h1]:text-zinc-950
+            [&>h2]:font-medium [&>h2]:tracking-tight [&>h2]:text-2xl [&>h2]:text-zinc-950
+            [&>[data-lead]]:text-center [&>[data-lead]]:text-xl [&>[data-lead]]:text-zinc-950
+            [&>p]:text-lg
+            [&>p>strong]:text-zinc-950
         ">
             <h1>Supercharge Your Team’s Productivity</h1>
             <p class="max-w-lg mx-auto mt-6" data-lead>
                 Effortlessly automate your workflows and collaborate in real time, so your team can focus on what matters most and achieve more together.
             </p>
             <div class="mt-6 text-center text-sm">
-                Creado por <span>Oliver Servín</span>
+                Creado por <span class="text-zinc-950">Oliver Servín</span>
             </div>
 
-            <p class="mt-20">
+            <p class="mt-48">
                 This cloud-based solution streamlines your team’s daily operations. It enables you to automate repetitive tasks and centralize project management.
             </p>
-            <p>
+            <p class="mt-6">
                 With less time spent on manual processes, your team can focus on delivering results. Every member works more efficiently and stays aligned on shared goals.
             </p>
 
@@ -30,10 +32,10 @@
             <p class="mt-6">
                 At the heart of the platform is a <strong>visual workflow builder</strong> that lets you create, customize, and deploy automated workflows using a simple drag-and-drop interface.
             </p>
-            <p>
+            <p class="mt-6">
                 <strong>Real-time collaboration</strong> is built in, allowing you to share tasks, files, and updates instantly with your team. The solution integrates seamlessly with popular tools such as Slack, Google Workspace, and Trello, making it easy to fit into your existing workflow.
             </p>
-            <p>
+            <p class="mt-6">
                 An intuitive <strong>analytics dashboard</strong> provides insights into productivity, workflow efficiency, and team performance, helping you make data-driven decisions every day.
             </p>
 
@@ -41,7 +43,7 @@
             <p class="mt-6">
                 Getting started is simple. After signing up, you can invite your team and begin building workflows within minutes.
             </p>
-            <p>
+            <p class="mt-6">
                 The platform enables you to automate approvals, notifications, and data entry <strong>without any coding required</strong>. Its user-friendly dashboard keeps everyone on the same page, ensuring that projects move forward smoothly and nothing falls through the cracks.
             </p>
 
@@ -49,10 +51,10 @@
             <p class="mt-6">
                 By automating repetitive tasks, the platform <strong>saves your team valuable time</strong> and reduces manual work.
             </p>
-            <p>
+            <p class="mt-6">
                 Collaboration is enhanced as everyone stays in sync with shared boards and real-time updates. Transparency increases as you monitor progress and quickly identify bottlenecks through powerful analytics.
             </p>
-            <p>
+            <p class="mt-6">
                 Whether you’re a startup or a large enterprise, this solution is designed to scale with your team and support your growth every step of the way.
             </p>
 
@@ -60,7 +62,7 @@
             <p class="mt-6">
                 If you’re ready to transform the way your team works, <strong>sign up for a free 14-day trial</strong> and experience the benefits for yourself.
             </p>
-            <p>
+            <p class="mt-6">
                 There’s no credit card required, and you’ll discover how easy it is to boost productivity and streamline your workflow from day one.
             </p>
         </main>
