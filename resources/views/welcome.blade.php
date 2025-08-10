@@ -5,8 +5,8 @@
     </head>
     <body>
         <header class="sticky flex justify-end p-6 gap-4">
-            <flux:button variant="subtle" size="sm">Login</flux:button>
-            <flux:button variant="primary" color="amber" size="sm">Get Started</flux:button>
+            <flux:button variant="subtle" size="sm">{{ __('Login') }}</flux:button>
+            <flux:button variant="primary" color="amber" size="sm">{{ __('Get Started') }}</flux:button>
         </header>
 
         <main class="
