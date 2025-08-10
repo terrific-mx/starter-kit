@@ -4,12 +4,17 @@
         @include('partials.head')
     </head>
     <body>
+        <header class="sticky flex justify-end p-6 gap-4">
+            <flux:button variant="subtle" size="sm">Login</flux:button>
+            <flux:button variant="primary" color="amber" size="sm">Get Started</flux:button>
+        </header>
+
         <main class="
-            mx-auto mb-8 max-w-[740px] px-4 mt-20
+            mx-auto mb-8 max-w-3xl px-4 mt-20
             text-zinc-700
             [&>h1]:text-center [&>h1]:font-medium [&>h1]:text-5xl [&>h1]:tracking-tight [&>h1]:text-zinc-950
             [&>h2]:font-medium [&>h2]:tracking-tight [&>h2]:text-2xl [&>h2]:text-zinc-950
-            [&>[data-lead]]:text-center [&>[data-lead]]:text-xl [&>[data-lead]]:text-zinc-950
+            [&>[data-lead]]:text-center [&>[data-lead]]:text-xl [&>[data-lead]]:text-zinc-900
             [&>p]:text-lg
             [&>p>strong]:text-zinc-950
         ">
@@ -66,7 +71,7 @@
                 There’s no credit card required, and you’ll discover how easy it is to boost productivity and streamline your workflow from day one.
             </p>
 
-            <flux:card class="max-w-xl mx-auto mt-20">
+            <flux:card class="max-w-lg mx-auto mt-20">
                 <h2 class="text-2xl font-medium tracking-tight text-zinc-950 text-center mt-2">Simple, Transparent Pricing</h2>
                 <p class="text-center mt-4">Choose a plan that fits your team and get started with confidence—no hidden fees, ever.</p>
                 <ul class="mt-9 gap-3 md:grid md:grid-cols-2 md:gap-6 text-sm">
