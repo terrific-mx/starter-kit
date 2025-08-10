@@ -11,22 +11,57 @@
             [&>p]:text-lg [&>p]:text-zinc-700
             [&>h2]:font-medium [&>h2]:tracking-tight [&>h2]:text-2xl
         ">
-            <h1>Heading 1</h1>
-            <p class="max-w-lg mx-auto mt-6" data-lead>Lead paragraph content goes here.</p>
+            <h1>Supercharge Your Team’s Productivity</h1>
+            <p class="max-w-lg mx-auto mt-6" data-lead>
+                Effortlessly automate your workflows and collaborate in real time, so your team can focus on what matters most and achieve more together.
+            </p>
             <div class="mt-6 text-center text-sm">
                 Creado por <span>Oliver Servín</span>
             </div>
-            <p class="mt-48">
-                Paragraph content goes here.
+
+            <p class="mt-20">
+                This cloud-based solution streamlines your team’s daily operations. It enables you to automate repetitive tasks and centralize project management.
             </p>
-            <p class="mt-6">
-                Paragraph content goes here.
+            <p>
+                With less time spent on manual processes, your team can focus on delivering results. Every member works more efficiently and stays aligned on shared goals.
             </p>
-            <h2 class="mt-20">
-                Heading 2
-            </h2>
+
+            <h2 class="mt-20">Everything You Need, All in One Place</h2>
             <p class="mt-6">
-                Paragraph content goes here.
+                At the heart of the platform is a <strong>visual workflow builder</strong> that lets you create, customize, and deploy automated workflows using a simple drag-and-drop interface.
+            </p>
+            <p>
+                <strong>Real-time collaboration</strong> is built in, allowing you to share tasks, files, and updates instantly with your team. The solution integrates seamlessly with popular tools such as Slack, Google Workspace, and Trello, making it easy to fit into your existing workflow.
+            </p>
+            <p>
+                An intuitive <strong>analytics dashboard</strong> provides insights into productivity, workflow efficiency, and team performance, helping you make data-driven decisions every day.
+            </p>
+
+            <h2 class="mt-20">Get Up and Running in Minutes</h2>
+            <p class="mt-6">
+                Getting started is simple. After signing up, you can invite your team and begin building workflows within minutes.
+            </p>
+            <p>
+                The platform enables you to automate approvals, notifications, and data entry <strong>without any coding required</strong>. Its user-friendly dashboard keeps everyone on the same page, ensuring that projects move forward smoothly and nothing falls through the cracks.
+            </p>
+
+            <h2 class="mt-20">Unlock Your Team’s Full Potential</h2>
+            <p class="mt-6">
+                By automating repetitive tasks, the platform <strong>saves your team valuable time</strong> and reduces manual work.
+            </p>
+            <p>
+                Collaboration is enhanced as everyone stays in sync with shared boards and real-time updates. Transparency increases as you monitor progress and quickly identify bottlenecks through powerful analytics.
+            </p>
+            <p>
+                Whether you’re a startup or a large enterprise, this solution is designed to scale with your team and support your growth every step of the way.
+            </p>
+
+            <h2 class="mt-20">Start Your Journey Today</h2>
+            <p class="mt-6">
+                If you’re ready to transform the way your team works, <strong>sign up for a free 14-day trial</strong> and experience the benefits for yourself.
+            </p>
+            <p>
+                There’s no credit card required, and you’ll discover how easy it is to boost productivity and streamline your workflow from day one.
             </p>
         </main>
     </body>
