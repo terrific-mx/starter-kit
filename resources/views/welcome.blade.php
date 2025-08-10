@@ -65,6 +65,48 @@
             <p class="mt-6">
                 There’s no credit card required, and you’ll discover how easy it is to boost productivity and streamline your workflow from day one.
             </p>
+
+            <flux:card class="max-w-xl mx-auto mt-48">
+                <h2 class="text-2xl font-medium tracking-tight text-zinc-950 text-center mt-2">Simple, Transparent Pricing</h2>
+                <p class="text-center mt-4">Choose a plan that fits your team and get started with confidence—no hidden fees, ever.</p>
+                <ul class="mt-9 gap-3 md:grid md:grid-cols-2 md:gap-6 text-sm">
+                    <li class="flex gap-2">
+                        <flux:icon.check-circle variant="mini" class="text-green-500" />
+                        Unlimited workflows and automations
+                    </li>
+                    <li class="flex gap-2">
+                        <flux:icon.check-circle variant="mini" class="text-green-500" />
+                        Real-time team collaboration
+                    </li>
+                    <li class="flex gap-2">
+                        <flux:icon.check-circle variant="mini" class="text-green-500" />
+                        Seamless integrations with popular tools
+                    </li>
+                    <li class="flex gap-2">
+                        <flux:icon.check-circle variant="mini" class="text-green-500" />
+                        Advanced analytics and reporting
+                    </li>
+                    <li class="flex gap-2">
+                        <flux:icon.check-circle variant="mini" class="text-green-500" />
+                        Priority email support
+                    </li>
+                    <li class="flex gap-2">
+                        <flux:icon.check-circle variant="mini" class="text-green-500" />
+                        Customizable user roles and permissions
+                    </li>
+                    <li class="flex gap-2">
+                        <flux:icon.check-circle variant="mini" class="text-green-500" />
+                        Secure cloud infrastructure
+                    </li>
+                    <li class="flex gap-2">
+                        <flux:icon.check-circle variant="mini" class="text-green-500" />
+                        14-day free trial, no credit card required
+                    </li>
+                </ul>
+                <flux:button variant="primary" color="amber" class="mt-8 w-full text-base!">
+                    Get started now
+                </flux:button>
+            </flux:card>
         </main>
     </body>
 </html>
