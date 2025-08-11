@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="bg-zinc-50 antialiased">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="antialiased">
     <head>
         @include('partials.head')
     </head>
-    <body>
+    <body class="bg-zinc-50">
         <header class="sticky flex justify-end p-6 gap-4">
             @auth
                 <flux:button :href="route('dashboard')" variant="primary" color="amber" size="sm" wire:navigate>{{ __('Dashboard') }}</flux:button>
