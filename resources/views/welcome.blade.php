@@ -37,6 +37,14 @@
                 With less time spent on manual processes, your team can focus on delivering results. Every member works more efficiently and stays aligned on shared goals.
             </p>
 
+            <flux:card class="min-h-72 mt-10 flex flex-col">
+                <div class="flex-1 flex flex-col justify-end">
+                    <div class="flex justify-center">
+                        <flux:button size="sm">{{ __('Start demo') }}</flux:button>
+                    </div>
+                </div>
+            </flux:card>
+
             <h2 class="mt-20">Everything You Need, All in One Place</h2>
             <p class="mt-6">
                 At the heart of the platform is a <strong>visual workflow builder</strong> that lets you create, customize, and deploy automated workflows using a simple drag-and-drop interface.
@@ -112,13 +120,16 @@
                         14-day free trial
                     </li>
                 </ul>
-                <flux:button variant="primary" color="amber" class="mt-9 w-full text-base!">
+                <flux:button :href="route('register')" variant="primary" color="amber" class="mt-9 w-full text-base!">
                     Get started now
                 </flux:button>
             </flux:card>
 
             <div class="mt-64 flex items-center justify-between text-zinc-400">
-                <p class="text-sm"><strong class="font-medium">flowpilot</strong>.com</p>
+                <p class="text-sm flex items-center gap-2.5">
+                    <x-app-logo-icon class="size-4 text-zinc-300" />
+                    <span><strong class="font-medium">flowpilot</strong>.com</span>
+                </p>
                 <p class="text-sm">por <strong class="font-medium">Oliver Servín</strong></p>
             </div>
         </main>
