@@ -16,4 +16,8 @@ jobs:
         env:
           DEPLOY_WEBHOOK: ${{ secrets.DEPLOY_WEBHOOK }}
         run: |
-          curl -n "$DEPLOY_WEBHOOK"
+          if [ -n "$DEPLOY_WEBHOOK" ]; then
+            curl -n "$DEPLOY_WEBHOOK"
+          else
+            echo "DEPLOY_WEBHOOK secret is not set. Skipping deploy ping."
+          fi
