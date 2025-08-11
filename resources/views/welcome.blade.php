@@ -27,7 +27,7 @@
                 Effortlessly automate your workflows and collaborate in real time, so your team can focus on what matters most and achieve more together.
             </p>
             <div class="mt-6 text-center text-sm">
-                Creado por <span class="text-zinc-950">Oliver Servín</span>
+                Created by <span class="text-zinc-950">Oliver Servín</span>
             </div>
 
             <p class="mt-48">
@@ -130,7 +130,7 @@
                     <x-app-logo-icon class="size-4 text-zinc-300" />
                     <span><strong class="font-medium">flowpilot</strong>.com</span>
                 </p>
-                <p class="text-sm">por <strong class="font-medium">Oliver Servín</strong></p>
+                <p class="text-sm">by <strong class="font-medium">Oliver Servín</strong></p>
             </div>
         </main>
     </body>
