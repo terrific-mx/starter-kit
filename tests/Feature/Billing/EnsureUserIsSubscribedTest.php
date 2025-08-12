@@ -7,7 +7,7 @@ use function Pest\Laravel\actingAs;
 
 uses(RefreshDatabase::class);
 
-it('redirects unsubscribed users to the subscription-required page when accessing a protected route', function () {
+it('redirects unsubscribed users to the subscription-required page when accessing protected routes', function () {
     $user = User::factory()->create([
         'email_verified_at' => now(),
     ]);

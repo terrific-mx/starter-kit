@@ -7,7 +7,7 @@ use function Pest\Laravel\actingAs;
 
 uses(RefreshDatabase::class);
 
-it('redirects unsubscribed user to dashboard', function () {
+it('redirects unsubscribed users to the dashboard when accessing the billing portal', function () {
     /** @var User $user */
     $user = User::factory()->create();
 

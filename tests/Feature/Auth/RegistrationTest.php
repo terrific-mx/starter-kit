@@ -2,13 +2,13 @@
 
 use Livewire\Volt\Volt;
 
-test('registration screen can be rendered', function () {
+it('renders the registration screen', function () {
     $response = $this->get('/register');
 
     $response->assertStatus(200);
 });
 
-test('new users can register', function () {
+it('registers a new user with valid data', function () {
     $response = Volt::test('auth.register')
         ->set('name', 'Test User')
         ->set('email', 'test@example.com')

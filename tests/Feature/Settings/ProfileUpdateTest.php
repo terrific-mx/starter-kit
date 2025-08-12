@@ -9,7 +9,7 @@ test('profile page is displayed', function () {
     $this->get('/settings/profile')->assertOk();
 });
 
-test('profile information can be updated', function () {
+it('updates the profile information', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);
@@ -43,7 +43,7 @@ test('email verification status is unchanged when email address is unchanged', f
     expect($user->refresh()->email_verified_at)->not->toBeNull();
 });
 
-test('user can delete their account', function () {
+it('deletes the user account with the correct password', function () {
     $user = User::factory()->create();
 
     $this->actingAs($user);

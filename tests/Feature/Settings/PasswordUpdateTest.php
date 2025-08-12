@@ -4,7 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Volt\Volt;
 
-test('password can be updated', function () {
+it('updates the password with the correct current password', function () {
     $user = User::factory()->create([
         'password' => Hash::make('password'),
     ]);
@@ -22,7 +22,7 @@ test('password can be updated', function () {
     expect(Hash::check('new-password', $user->refresh()->password))->toBeTrue();
 });
 
-test('correct password must be provided to update password', function () {
+it('requires the correct current password to update the password', function () {
     $user = User::factory()->create([
         'password' => Hash::make('password'),
     ]);

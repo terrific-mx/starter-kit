@@ -3,13 +3,13 @@
 use App\Models\User;
 use Livewire\Volt\Volt as LivewireVolt;
 
-test('login screen can be rendered', function () {
+it('renders the login screen', function () {
     $response = $this->get('/login');
 
     $response->assertStatus(200);
 });
 
-test('users can authenticate using the login screen', function () {
+it('authenticates users with valid credentials', function () {
     $user = User::factory()->create();
 
     $response = LivewireVolt::test('auth.login')
@@ -24,7 +24,7 @@ test('users can authenticate using the login screen', function () {
     $this->assertAuthenticated();
 });
 
-test('users can not authenticate with invalid password', function () {
+it('rejects authentication with an invalid password', function () {
     $user = User::factory()->create();
 
     $response = LivewireVolt::test('auth.login')
@@ -37,7 +37,7 @@ test('users can not authenticate with invalid password', function () {
     $this->assertGuest();
 });
 
-test('users can logout', function () {
+it('logs out authenticated users', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)->post('/logout');
