@@ -15,3 +15,4 @@
           'is_admin' => 'boolean',
       ];
   }
+- Never use the `.prevent` modifier for `wire:submit` in Livewire forms. The latest Livewire version does not require it.
