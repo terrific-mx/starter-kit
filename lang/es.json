@@ -1,5 +1,11 @@
 {
   "Dashboard": "Panel",
+  "Create Organization": "Crear organización",
+  "Enter a name for your new organization.": "Ingresa un nombre para tu nueva organización.",
+  "Organization Name": "Nombre de la organización",
+  "Acme Inc": "Acme Inc",
+  "Cancel": "Cancelar",
+  "Create": "Crear",
   "Login": "Iniciar sesión",
   "Get Started": "Comenzar",
   "Start demo": "Iniciar demo",
