@@ -33,6 +33,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
         Organization::create([
             'name' => $user->name,
             'user_id' => $user->id,
+            'personal' => true,
         ]);
 
         Auth::login($user);
