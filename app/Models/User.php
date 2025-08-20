@@ -60,8 +60,22 @@ class User extends Authenticatable
             ->implode('');
     }
 
+    public function organizations()
+    {
+        return $this->hasMany(Organization::class);
+    }
+
     public function currentOrganization()
     {
+        if (is_null($this->current_organization_id)) {
+            $personalOrg = $this->organizations()->where('personal', true)->first();
+            if ($personalOrg) {
+                $this->current_organization_id = $personalOrg->id;
+                $this->save();
+                $this->refresh();
+            }
+        }
         return $this->belongsTo(Organization::class, 'current_organization_id');
     }
 }
+
