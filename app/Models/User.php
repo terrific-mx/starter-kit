@@ -75,6 +75,7 @@ class User extends Authenticatable
 
             $this->refresh();
         }
+
         return $this->belongsTo(Organization::class, 'current_organization_id');
     }
 
