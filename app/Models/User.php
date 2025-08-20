@@ -65,17 +65,28 @@ class User extends Authenticatable
         return $this->hasMany(Organization::class);
     }
 
+    /**
+     * Get the user's current organization.
+     */
     public function currentOrganization()
     {
         if (is_null($this->current_organization_id)) {
-            $personalOrg = $this->organizations()->where('personal', true)->first();
-            if ($personalOrg) {
-                $this->current_organization_id = $personalOrg->id;
-                $this->save();
-                $this->refresh();
-            }
+            $this->assignPersonalOrganizationAsCurrent();
+            $this->refresh();
         }
         return $this->belongsTo(Organization::class, 'current_organization_id');
+    }
+
+    /**
+     * Assign the user's personal organization as their current organization.
+     */
+    private function assignPersonalOrganizationAsCurrent(): void
+    {
+        $personalOrg = $this->organizations()->where('personal', true)->first();
+        if ($personalOrg) {
+            $this->current_organization_id = $personalOrg->id;
+            $this->save();
+        }
     }
 }
 
