@@ -15,9 +15,11 @@ new class extends Component {
             'name' => ['required', 'string', 'max:255'],
         ]);
 
-        Auth::user()->organizations()->create([
+        $organization = Auth::user()->organizations()->create([
             'name' => $this->name,
         ]);
+        Auth::user()->update(['current_organization_id' => $organization->id]);
+        return redirect()->route('dashboard');
     }
 }; ?>
 
