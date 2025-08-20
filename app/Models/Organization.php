@@ -10,7 +10,7 @@ class Organization extends Model
     /** @use HasFactory<\Database\Factories\OrganizationFactory> */
     use HasFactory;
 
-    protected $fillable = ['name', 'user_id'];
+    protected $guarded = [];
 
     public function user()
     {
