@@ -30,7 +30,6 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
         event(new Registered(($user = User::create($validated))));
 
-        // Create personal organization for the new user
         Organization::create([
             'name' => $user->name,
             'user_id' => $user->id,
