@@ -27,7 +27,7 @@ new class extends Component {
             <flux:heading size="lg">{{ __('Create Organization') }}</flux:heading>
             <flux:text class="mt-2">{{ __('Enter a name for your new organization.') }}</flux:text>
         </div>
-        <flux:input label="{{ __('Organization Name') }}" placeholder="{{ __('Acme Inc') }}" wire:model="name" />
+        <flux:input :label="__('Organization Name')" :placeholder="__('Acme Inc')" wire:model="name" />
 
         <div class="flex gap-2">
             <flux:spacer />
