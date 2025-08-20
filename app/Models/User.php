@@ -93,9 +93,9 @@ class User extends Authenticatable
     }
 
     /**
-     * Set the user's current organization.
+     * Switch the user's current organization.
      */
-    public function setCurrentOrganization(Organization $organization): void
+    public function switchOrganization(Organization $organization): void
     {
         $this->current_organization_id = $organization->id;
 

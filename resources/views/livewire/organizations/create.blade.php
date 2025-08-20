@@ -19,7 +19,7 @@ new class extends Component {
             'name' => $this->name,
         ]);
 
-        Auth::user()->setCurrentOrganization($organization);
+        Auth::user()->switchOrganization($organization);
 
         return $this->redirect(route('dashboard'), navigate: true);
     }
