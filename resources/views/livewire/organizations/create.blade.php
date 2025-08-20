@@ -18,8 +18,10 @@ new class extends Component {
         $organization = Auth::user()->organizations()->create([
             'name' => $this->name,
         ]);
-        Auth::user()->update(['current_organization_id' => $organization->id]);
-        return redirect()->route('dashboard');
+
+        Auth::user()->setCurrentOrganization($organization);
+
+        return $this->redirect(route('dashboard'), navigate: true);
     }
 }; ?>
 

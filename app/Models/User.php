@@ -91,4 +91,14 @@ class User extends Authenticatable
             }
         });
     }
+
+    /**
+     * Set the user's current organization.
+     */
+    public function setCurrentOrganization(Organization $organization): void
+    {
+        $this->current_organization_id = $organization->id;
+
+        $this->save();
+    }
 }

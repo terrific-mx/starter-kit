@@ -9,7 +9,7 @@
 
             <flux:dropdown position="top" align="start">
                 <flux:profile
-                    :name="auth()->user()->currentOrganization->name"
+                    :name="auth()->user()->currentOrganization?->name ?? __('No organization')"
                 />
                 <flux:menu>
                     <flux:menu.radio.group>
