@@ -44,4 +44,5 @@ it('creates a personal organization for the new user on registration', function 
     $organization = Organization::first();
     expect($organization)->not->toBeNull();
     expect($organization->user->is($user))->toBeTrue();
+    expect($organization->personal)->toBeTrue();
 });
