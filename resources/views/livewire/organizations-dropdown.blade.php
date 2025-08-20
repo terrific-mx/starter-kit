@@ -1,6 +1,7 @@
 <?php
 
 use Livewire\Volt\Component;
+use Illuminate\Support\Facades\Auth;
 
 new class extends Component {
     public $currentOrganization;
@@ -8,7 +9,7 @@ new class extends Component {
 
     public function mount()
     {
-        $user = auth()->user();
+        $user = Auth::user();
         $this->currentOrganization = $user->currentOrganization;
         $this->organizations = $user->organizations;
     }
