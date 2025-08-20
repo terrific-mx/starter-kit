@@ -1,6 +1,8 @@
 <?php
 
 use Livewire\Volt\Volt;
+use App\Models\User;
+use App\Models\Organization;
 
 it('renders the registration screen', function () {
     $response = $this->get('/register');
@@ -21,4 +23,26 @@ it('registers a new user with valid data', function () {
         ->assertRedirect(route('dashboard', absolute: false));
 
     $this->assertAuthenticated();
+});
+
+it('creates a personal organization for the new user on registration', function () {
+    $userName = 'Test User';
+    $userEmail = 'test2@example.com';
+
+    $response = Volt::test('auth.register')
+        ->set('name', $userName)
+        ->set('email', $userEmail)
+        ->set('password', 'password')
+        ->set('password_confirmation', 'password')
+        ->call('register');
+
+    $response->assertHasNoErrors();
+
+    $user = User::first();
+    expect($user)->not->toBeNull();
+
+    // Placeholder: Organization model and relationship
+    $organization = Organization::first();
+    expect($organization)->not->toBeNull();
+    expect($organization->user->is($user))->toBeTrue();
 });
