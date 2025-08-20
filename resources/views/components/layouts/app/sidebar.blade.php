@@ -22,7 +22,9 @@
                         @endforeach
                     </flux:menu.radio.group>
                     <flux:menu.separator />
-                    <flux:menu.item icon="plus">{{ __('New organization') }}</flux:menu.item>
+                    <flux:modal.trigger name="create-organization">
+                        <flux:menu.item icon="plus">{{ __('New organization') }}</flux:menu.item>
+                    </flux:modal.trigger>
                 </flux:menu>
             </flux:dropdown>
 
