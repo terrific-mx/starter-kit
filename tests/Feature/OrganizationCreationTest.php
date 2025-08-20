@@ -15,7 +15,11 @@ it('creates a new organization for the user with valid data', function () {
         ->call('create');
 
     $response->assertHasNoErrors();
-    expect($user->organizations()->where('name', $orgName)->exists())->toBeTrue();
+    $user->refresh();
+    $organization = $user->organizations()->where('name', $orgName)->first();
+    expect($organization)->not->toBeNull();
+    expect($user->currentOrganization->is($organization))->toBeTrue();
+    $response->assertRedirect(route('dashboard'));
 });
 
 it('shows validation errors for missing or invalid organization name', function () {
