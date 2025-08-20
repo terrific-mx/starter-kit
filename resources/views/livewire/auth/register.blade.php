@@ -30,11 +30,13 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
         event(new Registered(($user = User::create($validated))));
 
-        Organization::create([
+        $organization = Organization::create([
             'name' => $user->name,
             'user_id' => $user->id,
             'personal' => true,
         ]);
+        $user->current_organization_id = $organization->id;
+        $user->save();
 
         Auth::login($user);
 
