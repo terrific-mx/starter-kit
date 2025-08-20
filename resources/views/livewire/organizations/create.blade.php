@@ -1,13 +1,14 @@
 <?php
 
 use Livewire\Volt\Component;
+use Illuminate\Support\Facades\Auth;
 
 new class extends Component {
     public string $name = '';
 
     public function create()
     {
-        if (!auth()->check()) {
+        if (!Auth::check()) {
             abort(403);
         }
 
@@ -15,7 +16,7 @@ new class extends Component {
             'name' => ['required', 'string', 'max:255'],
         ]);
 
-        auth()->user()->organizations()->create([
+        Auth::user()->organizations()->create([
             'name' => $this->name,
         ]);
     }
