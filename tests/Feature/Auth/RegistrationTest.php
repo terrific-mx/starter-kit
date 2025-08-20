@@ -41,7 +41,6 @@ it('creates a personal organization for the new user on registration', function 
     $user = User::first();
     expect($user)->not->toBeNull();
 
-    // Placeholder: Organization model and relationship
     $organization = Organization::first();
     expect($organization)->not->toBeNull();
     expect($organization->user->is($user))->toBeTrue();
