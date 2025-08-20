@@ -83,11 +83,11 @@ class User extends Authenticatable
      */
     private function assignPersonalOrganizationAsCurrent(): void
     {
-        $personalOrg = $this->organizations()->where('personal', true)->first();
-
-        if ($personalOrg) {
-            $this->current_organization_id = $personalOrg->id;
-            $this->save();
-        }
+        tap($this->organizations()->where('personal', true)->first(), function ($personalOrg) {
+            if ($personalOrg) {
+                $this->current_organization_id = $personalOrg->id;
+                $this->save();
+            }
+        });
     }
 }
