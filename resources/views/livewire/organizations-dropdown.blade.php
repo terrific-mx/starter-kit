@@ -3,18 +3,26 @@
 use Livewire\Volt\Component;
 
 new class extends Component {
-    //
+    public $currentOrganization;
+    public $organizations;
+
+    public function mount()
+    {
+        $user = auth()->user();
+        $this->currentOrganization = $user->currentOrganization;
+        $this->organizations = $user->organizations;
+    }
 }; ?>
 
 <flux:dropdown position="top" align="start">
     <flux:profile
-        :name="auth()->user()->currentOrganization?->name ?? __('No organization')"
+        :name="$currentOrganization?->name ?? __('No organization')"
     />
     <flux:menu>
         <flux:menu.radio.group>
-            @foreach(auth()->user()->organizations as $organization)
+            @foreach($organizations as $organization)
                 <flux:menu.radio
-                    :checked="auth()->user()->currentOrganization->is($organization)"
+                    :checked="$currentOrganization->is($organization)"
                 >
                     {{ $organization->name }}
                 </flux:menu.radio>
