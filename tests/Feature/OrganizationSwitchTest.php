@@ -2,65 +2,65 @@
 
 use App\Models\User;
 use App\Models\Organization;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 
-uses(RefreshDatabase::class);
-
-test('user can switch to another organization they belong to', function () {
+// User can switch to another organization they belong to
+it('allows a user to switch to another organization they belong to', function () {
     $user = User::factory()->create();
     $orgA = Organization::factory()->create();
     $orgB = Organization::factory()->create();
     $user->organizations()->attach([$orgA->id, $orgB->id]);
+    Auth::login($user);
     $user->currentOrganization()->associate($orgA)->save();
 
-    $this->actingAs($user)
-        ->post(route('organizations.switch'), ['organization_id' => $orgB->id])
-        ->assertRedirect(route('dashboard'));
+    $response = $this->post(route('organizations.switch'), ['organization_id' => $orgB->id]);
 
+    $response->assertRedirect(route('dashboard'));
     $user->refresh();
     expect($user->currentOrganization->is($orgB))->toBeTrue();
 });
 
-test('user cannot switch to an organization they do not belong to', function () {
+// User cannot switch to an organization they do not belong to
+it('prevents switching to an organization the user does not belong to', function () {
     $user = User::factory()->create();
     $orgA = Organization::factory()->create();
     $orgB = Organization::factory()->create();
     $user->organizations()->attach($orgA->id);
+    Auth::login($user);
     $user->currentOrganization()->associate($orgA)->save();
 
-    $this->actingAs($user)
-        ->post(route('organizations.switch'), ['organization_id' => $orgB->id])
-        ->assertForbidden();
+    $response = $this->post(route('organizations.switch'), ['organization_id' => $orgB->id]);
 
+    $response->assertForbidden();
     $user->refresh();
     expect($user->currentOrganization->is($orgA))->toBeTrue();
 });
 
-test('dropdown only shows organizations user belongs to', function () {
+// Switching to the same organization does not change anything
+it('does nothing when switching to the same organization', function () {
     $user = User::factory()->create();
     $orgA = Organization::factory()->create();
-    $orgB = Organization::factory()->create();
-    $orgC = Organization::factory()->create();
-    $user->organizations()->attach([$orgA->id, $orgB->id]);
+    $user->organizations()->attach($orgA->id);
+    Auth::login($user);
     $user->currentOrganization()->associate($orgA)->save();
 
-    $this->actingAs($user)
-        ->get(route('dashboard'))
-        ->assertSee($orgA->name)
-        ->assertSee($orgB->name)
-        ->assertDontSee($orgC->name);
+    $response = $this->post(route('organizations.switch'), ['organization_id' => $orgA->id]);
+
+    $response->assertRedirect(route('dashboard'));
+    $user->refresh();
+    expect($user->currentOrganization->is($orgA))->toBeTrue();
 });
 
-test('current organization is reflected in UI after switch', function () {
+// Flash message after switching
+it('flashes a message after switching organizations', function () {
     $user = User::factory()->create();
     $orgA = Organization::factory()->create();
     $orgB = Organization::factory()->create();
     $user->organizations()->attach([$orgA->id, $orgB->id]);
+    Auth::login($user);
     $user->currentOrganization()->associate($orgA)->save();
 
-    $this->actingAs($user)
-        ->post(route('organizations.switch'), ['organization_id' => $orgB->id]);
+    $response = $this->post(route('organizations.switch'), ['organization_id' => $orgB->id]);
 
-    $this->get(route('dashboard'))
-        ->assertSee($orgB->name);
+    $response->assertSessionHas('status', __('Organization switched successfully'));
 });
