@@ -39,12 +39,13 @@ it('creates a personal organization for the new user on registration', function 
     $response->assertHasNoErrors();
 
     $user = User::first();
+
     expect($user)->not->toBeNull();
 
     $organization = Organization::first();
+
     expect($organization)->not->toBeNull();
     expect($organization->user->is($user))->toBeTrue();
     expect($organization->personal)->toBeTrue();
-
     expect($user->currentOrganization->is($organization))->toBeTrue();
 });

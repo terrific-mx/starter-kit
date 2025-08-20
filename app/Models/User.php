@@ -72,6 +72,7 @@ class User extends Authenticatable
     {
         if (is_null($this->current_organization_id)) {
             $this->assignPersonalOrganizationAsCurrent();
+
             $this->refresh();
         }
         return $this->belongsTo(Organization::class, 'current_organization_id');
@@ -83,10 +84,10 @@ class User extends Authenticatable
     private function assignPersonalOrganizationAsCurrent(): void
     {
         $personalOrg = $this->organizations()->where('personal', true)->first();
+
         if ($personalOrg) {
             $this->current_organization_id = $personalOrg->id;
             $this->save();
         }
     }
 }
-
