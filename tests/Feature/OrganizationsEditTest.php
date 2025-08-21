@@ -14,7 +14,7 @@ it('an authenticated user can edit their organization name', function () {
         ]);
 
     Volt::actingAs($user)
-        ->test('organizations.edit', ['organization' => $organization])
+        ->test('organizations.settings.general', ['organization' => $organization])
         ->set('name', 'New Name')
         ->call('edit')
         ->assertHasNoErrors();
@@ -31,7 +31,7 @@ it('cannot update organization name to empty', function () {
         ]);
 
     Volt::actingAs($user)
-        ->test('organizations.edit', ['organization' => $organization])
+        ->test('organizations.settings.general', ['organization' => $organization])
         ->set('name', '')
         ->call('edit')
         ->assertHasErrors(['name' => 'required']);
@@ -47,7 +47,7 @@ it('forbids non-owners from editing the organization name', function () {
         ]);
 
     Volt::actingAs($nonOwner)
-        ->test('organizations.edit', ['organization' => $organization])
+        ->test('organizations.settings.general', ['organization' => $organization])
         ->set('name', 'Hacked Name')
         ->call('edit')
         ->assertForbidden();
