@@ -31,13 +31,10 @@ new class extends Component {
         return $this->redirectRoute('dashboard', navigate: true);
     }
 
-    public function updatedSelectedOrganizationId($id)
+    public function updatedSelectedOrganizationId(Organization $organization)
     {
-        if ($id !== $this->currentOrganization?->id) {
-            $organization = $this->organizations->firstWhere('id', $id);
-            if ($organization) {
-                $this->switchOrganization($organization);
-            }
+        if ($organization->id !== $this->currentOrganization?->id) {
+            $this->switchOrganization($organization);
         }
     }
 }; ?>
@@ -47,7 +44,7 @@ new class extends Component {
         :name="$currentOrganization?->name ?? __('No organization')"
     />
     <flux:menu>
-        <flux:menu.radio.group wire:model="selectedOrganizationId">
+        <flux:menu.radio.group wire:model.live="selectedOrganizationId">
             @foreach($organizations as $organization)
                 <flux:menu.radio :value="$organization->id">
                     {{ $organization->name }}
