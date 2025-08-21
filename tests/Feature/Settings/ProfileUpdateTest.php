@@ -4,13 +4,14 @@ use App\Models\User;
 use Livewire\Volt\Volt;
 
 test('profile page is displayed', function () {
-    $this->actingAs($user = User::factory()->create());
+    $user = User::factory()->withPersonalOrganization()->create();
+    $this->actingAs($user);
 
     $this->get('/settings/profile')->assertOk();
 });
 
 it('updates the profile information', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->withPersonalOrganization()->create();
 
     $this->actingAs($user);
 
@@ -29,7 +30,7 @@ it('updates the profile information', function () {
 });
 
 test('email verification status is unchanged when email address is unchanged', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->withPersonalOrganization()->create();
 
     $this->actingAs($user);
 
@@ -44,7 +45,7 @@ test('email verification status is unchanged when email address is unchanged', f
 });
 
 it('deletes the user account with the correct password', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->withPersonalOrganization()->create();
 
     $this->actingAs($user);
 
@@ -61,7 +62,7 @@ it('deletes the user account with the correct password', function () {
 });
 
 test('correct password must be provided to delete account', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->withPersonalOrganization()->create();
 
     $this->actingAs($user);
 

@@ -12,7 +12,7 @@ uses(RefreshDatabase::class);
 
 it('invites a member to an organization by email', function () {
     Notification::fake();
-    $owner = User::factory()->create();
+    $owner = User::factory()->withPersonalOrganization()->create();
     $organization = Organization::factory()->for($owner)->create();
     $inviteEmail = 'invitee@example.com';
 
@@ -36,7 +36,7 @@ it('invites a member to an organization by email', function () {
 
 it('requires an email to invite a member', function () {
     Notification::fake();
-    $owner = User::factory()->create();
+    $owner = User::factory()->withPersonalOrganization()->create();
     $organization = Organization::factory()->for($owner)->create();
 
     Volt::actingAs($owner)
@@ -48,7 +48,7 @@ it('requires an email to invite a member', function () {
 
 it('requires the email to be unique for the organization', function () {
     Notification::fake();
-    $owner = User::factory()->create();
+    $owner = User::factory()->withPersonalOrganization()->create();
     $organization = Organization::factory()->for($owner)->create();
     $inviteEmail = 'invitee@example.com';
 
@@ -65,9 +65,9 @@ it('requires the email to be unique for the organization', function () {
 
 it('forbids non-owners from sending organization invitations', function () {
     Notification::fake();
-    $owner = User::factory()->create();
+    $owner = User::factory()->withPersonalOrganization()->create();
     $organization = Organization::factory()->for($owner)->create();
-    $nonOwner = User::factory()->create();
+    $nonOwner = User::factory()->withPersonalOrganization()->create();
     $inviteEmail = 'invitee@example.com';
 
     Volt::actingAs($nonOwner)
