@@ -32,10 +32,7 @@ new class extends Component {
 
         $this->validate();
 
-        $invitation = OrganizationInvitation::create([
-            'organization_id' => $this->organization->id,
-            'email' => $this->email,
-        ]);
+        $invitation = $this->organization->inviteMember($this->email);
 
         Notification::route('mail', $this->email)
             ->notify(new OrganizationInvitationNotification($invitation));

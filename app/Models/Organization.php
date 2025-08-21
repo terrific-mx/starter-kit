@@ -32,6 +32,13 @@ class Organization extends Model
         $this->members()->attach($user->id);
     }
 
+    public function inviteMember(string $email): OrganizationInvitation
+    {
+        return $this->invitations()->create([
+            'email' => $email,
+        ]);
+    }
+
     protected function casts(): array
     {
         return [
