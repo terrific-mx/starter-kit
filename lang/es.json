@@ -66,5 +66,8 @@
   "Click here to re-send the verification email.": "Haz clic aquí para reenviar el correo de verificación.",
   "A new verification link has been sent to your email address.": "Se ha enviado un nuevo enlace de verificación a tu correo electrónico.",
   "Manage your profile and account settings": "Administra tu perfil y la configuración de tu cuenta",
-  "Organization": "Organización"
+  "Organization": "Organización",
+  "Home": "Inicio",
+  "Edit Organization": "Editar organización",
+  "Update your organization name below to keep your workspace up to date.": "Actualiza el nombre de tu organización para mantener tu espacio de trabajo al día."
 }
