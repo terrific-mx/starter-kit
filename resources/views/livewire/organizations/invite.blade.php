@@ -27,6 +27,8 @@ new class extends Component {
 
     public function sendInvitation()
     {
+        $this->authorize('invite', $this->organization);
+
         $this->validate();
 
         $invitation = OrganizationInvitation::create([

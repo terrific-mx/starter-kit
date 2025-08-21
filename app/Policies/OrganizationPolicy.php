@@ -34,6 +34,14 @@ class OrganizationPolicy
         return $organization->user->is($user);
     }
 
+    /**
+     * Determine whether the user can invite members to the organization.
+     */
+    public function invite(User $user, Organization $organization): bool
+    {
+        return $organization->user->is($user);
+    }
+
     public function __construct()
     {
         //
