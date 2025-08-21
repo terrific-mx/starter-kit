@@ -5,6 +5,7 @@ use App\Models\Organization;
 use App\Models\OrganizationInvitation;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\OrganizationInvitation as OrganizationInvitationNotification;
+use Flux\Flux;
 use Illuminate\Validation\Rule;
 
 new class extends Component {
@@ -38,6 +39,14 @@ new class extends Component {
 
         Notification::route('mail', $this->email)
             ->notify(new OrganizationInvitationNotification($invitation));
+
+        Flux::toast(
+            heading: __('Invitation sent'),
+            text: __('The invitation was sent to :email.', ['email' => $this->email]),
+            variant: 'success'
+        );
+
+        $this->reset('email');
     }
 }; ?>
 

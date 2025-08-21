@@ -79,5 +79,7 @@
   "Invite Member": "Invitar miembro",
   "Email address": "Correo electrónico",
   "Enter member email": "Ingresa el correo del miembro",
-  "Send Invitation": "Enviar invitación"
+  "Send Invitation": "Enviar invitación",
+  "Invitation sent": "Invitación enviada",
+  "The invitation was sent to :email.": "La invitación fue enviada a :email."
 }
