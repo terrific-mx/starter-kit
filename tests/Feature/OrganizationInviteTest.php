@@ -9,7 +9,7 @@ use Livewire\Volt\Volt;
 
 uses(RefreshDatabase::class);
 
-it('allows an organization owner to invite a member to their organization by email using the Volt invitation component', function () {
+it('invites a member to an organization by email', function () {
     Notification::fake();
     $owner = User::factory()->create();
     $organization = Organization::factory()->for($owner)->create();
