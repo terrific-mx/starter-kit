@@ -3,6 +3,7 @@
 use App\Models\Organization;
 use App\Models\User;
 use Livewire\Volt\Volt;
+use function Pest\Laravel\actingAs;
 
 it('an authenticated user can edit their organization name', function () {
     $user = User::factory()->create();
@@ -52,4 +53,13 @@ it('forbids non-owners from editing the organization name', function () {
         ->assertForbidden();
 
     expect($organization->fresh()->name)->toBe('Old Name');
+});
+
+it('returns a successful response for the organization details page', function () {
+    $user = User::factory()->create();
+    $organization = Organization::factory()->for($user)->create();
+
+    actingAs($user)
+        ->get("/organizations/{$organization->id}")
+        ->assertSuccessful();
 });
