@@ -78,7 +78,7 @@ it('forbids non-owners from sending organization invitations', function () {
 });
 
 it('allows the owner to revoke a pending invitation', function () {
-    $owner = User::factory()->withPersonalOrganization()->create();
+    $owner = User::factory()->create();
     $organization = Organization::factory()->for($owner)->create();
     $inviteEmail = 'invitee@example.com';
     $invitation = OrganizationInvitation::factory()->for($organization)->create([

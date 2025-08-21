@@ -58,6 +58,20 @@ new class extends Component {
     {
         return $this->organization->invitations()->latest()->get();
     }
+
+    public function revokeInvitation(int $invitationId): void
+    {
+        if (auth()->id() !== $this->organization->user_id) {
+            abort(403);
+        }
+
+        $invitation = $this->organization->invitations()->find($invitationId);
+        if ($invitation) {
+            $invitation->delete();
+        }
+
+        $this->invitations = $this->getInvitations();
+    }
 }; ?>
 
 <div>
