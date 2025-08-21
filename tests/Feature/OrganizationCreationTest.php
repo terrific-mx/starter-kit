@@ -1,8 +1,8 @@
 <?php
 
-use Livewire\Volt\Volt;
 use App\Models\User;
-use App\Models\Organization;
+use Livewire\Volt\Volt;
+
 use function Pest\Laravel\actingAs;
 
 it('creates a new organization for the user with valid data', function () {

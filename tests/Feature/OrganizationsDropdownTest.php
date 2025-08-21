@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use App\Models\Organization;
+use App\Models\User;
 use Livewire\Volt\Volt;
 
 it('allows user to switch organizations from the dropdown', function () {

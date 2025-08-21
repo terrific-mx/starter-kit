@@ -1,8 +1,8 @@
 <?php
 
-use Livewire\Volt\Volt;
-use App\Models\User;
 use App\Models\Organization;
+use App\Models\User;
+use Livewire\Volt\Volt;
 
 it('renders the registration screen', function () {
     $response = $this->get('/register');
