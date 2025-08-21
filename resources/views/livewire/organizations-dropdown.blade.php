@@ -10,6 +10,7 @@ new class extends Component {
     public function mount()
     {
         $user = Auth::user();
+
         $this->currentOrganization = $user->currentOrganization;
         $this->organizations = $user->organizations;
     }
