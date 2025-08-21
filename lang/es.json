@@ -70,5 +70,10 @@
   "Organization": "Organización",
   "Home": "Inicio",
   "Edit Organization": "Editar organización",
-  "Update your organization name below to keep your workspace up to date.": "Actualiza el nombre de tu organización para mantener tu espacio de trabajo al día."
+  "Update your organization name below to keep your workspace up to date.": "Actualiza el nombre de tu organización para mantener tu espacio de trabajo al día.",
+  "You have been invited to join :organization": "Has sido invitado a unirte a :organization",
+  "Hello!": "¡Hola!",
+  "You have been invited to join the organization \":organization\".": "Has sido invitado a unirte a la organización \":organization\".",
+  "Accept Invitation": "Aceptar invitación",
+  "If you do not wish to join, you may ignore this email.": "Si no deseas unirte, puedes ignorar este correo."
 }
