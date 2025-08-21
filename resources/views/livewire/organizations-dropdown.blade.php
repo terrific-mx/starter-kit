@@ -9,7 +9,6 @@ new class extends Component {
     public $currentOrganization;
     public $organizations;
 
-    // Computed property for the authenticated user
     #[Computed]
     public function user() {
         return Auth::user();
@@ -24,7 +23,9 @@ new class extends Component {
     public function switchOrganization(Organization $organization)
     {
         $this->authorize('switch', $organization);
+
         $this->user->switchOrganization($organization);
+
         $this->currentOrganization = $organization;
 
         return $this->redirectRoute('dashboard', navigate: true);
