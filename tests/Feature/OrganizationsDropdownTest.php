@@ -13,7 +13,8 @@ it('allows user to switch organizations from the dropdown', function () {
 
     Volt::actingAs($user)
         ->test('organizations-dropdown')
-        ->call('switchOrganization', $orgB->id);
+        ->call('switchOrganization', $orgB->id)
+        ->assertRedirect(route('dashboard'));
 
     expect($user->fresh()->currentOrganization->is($orgB))->toBeTrue();
 });
