@@ -31,14 +31,16 @@ new class extends Component {
         <flux:breadcrumbs.item href="{{ route('home') }}">{{ __('Home') }}</flux:breadcrumbs.item>
         <flux:breadcrumbs.item>{{ __('Edit Organization') }}</flux:breadcrumbs.item>
     </flux:breadcrumbs>
-    <flux:heading size="xl" level="1" class="mb-2">
-        {{ __('Edit Organization') }}
-    </flux:heading>
-    <flux:text size="lg" class="mb-6">
-        {{ __('Update your organization name below to keep your workspace up to date.') }}
-    </flux:text>
-    <form wire:submit="edit">
-        <flux:input wire:model="name" :label="__('Name')" class="mb-4" />
+    <div class="mb-6">
+        <flux:heading level="1" class="mb-2">
+            {{ __('Edit Organization') }}
+        </flux:heading>
+        <flux:text>
+            {{ __('Update your organization name below to keep your workspace up to date.') }}
+        </flux:text>
+    </div>
+    <form wire:submit="edit" class="max-w-lg space-y-6">
+        <flux:input wire:model="name" :label="__('Name')" />
         <flux:button type="submit" variant="primary">
             {{ __('Save') }}
         </flux:button>
