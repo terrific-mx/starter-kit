@@ -36,11 +36,13 @@ new class extends Component {
 <div>
     <flux:breadcrumbs class="mb-6">
         <flux:breadcrumbs.item href="{{ route('home') }}">{{ __('Home') }}</flux:breadcrumbs.item>
-        <flux:breadcrumbs.item>{{ __('Edit Organization') }}</flux:breadcrumbs.item>
+        <flux:breadcrumbs.item href="{{ route('organizations.show', $organization) }}">{{ $organization->name }}</flux:breadcrumbs.item>
+        <flux:breadcrumbs.item href="{{ route('organizations.settings.general', $organization) }}">{{ __('Settings') }}</flux:breadcrumbs.item>
+        <flux:breadcrumbs.item>{{ __('General') }}</flux:breadcrumbs.item>
     </flux:breadcrumbs>
     <div class="mb-6">
         <flux:heading level="1" class="mb-2">
-            {{ __('Edit Organization') }}
+            {{ __('General Settings') }}
         </flux:heading>
         <flux:text>
             {{ __('Update your organization name below to keep your workspace up to date.') }}
@@ -53,4 +55,3 @@ new class extends Component {
         </flux:button>
     </form>
 </div>
-
