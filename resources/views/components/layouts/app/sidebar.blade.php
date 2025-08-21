@@ -15,7 +15,7 @@
 
             <flux:navlist>
                 <flux:navlist.group :heading="__('Organization')" variant="outline">
-                    <flux:navlist.item icon="cog-6-tooth" :href="route('organization.show')" wire:navigate>{{ __('Settings') }}</flux:navlist.item>
+                    <flux:navlist.item icon="cog-6-tooth" :href="route('organizations.show', auth()->user()->currentOrganization)" wire:navigate>{{ __('Settings') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
