@@ -20,3 +20,18 @@ it('an authenticated user can edit their organization name', function () {
 
     expect($organization->fresh()->name)->toBe('New Name');
 });
+
+it('cannot update organization name to empty', function () {
+    $user = User::factory()->create();
+    $organization = Organization::factory()
+        ->for($user)
+        ->create([
+            'name' => 'Old Name',
+        ]);
+
+    Volt::actingAs($user)
+        ->test('organizations.edit', ['organization' => $organization])
+        ->set('name', '')
+        ->call('edit')
+        ->assertHasErrors(['name' => 'required']);
+});
