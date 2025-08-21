@@ -3,6 +3,7 @@
 use App\Http\Middleware\EnsureUserIsSubscribed;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Http\Controllers\OrganizationInvitationAcceptController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,6 +21,10 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
     Volt::route('organizations/{organization}', 'organizations.edit')->name('organizations.show');
+
+    Route::get('organizations/invitations/{invitation}/accept', OrganizationInvitationAcceptController::class)
+        ->middleware('signed')
+        ->name('organizations.invitations.accept');
 });
 
 require __DIR__.'/auth.php';

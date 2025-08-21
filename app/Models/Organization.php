@@ -22,6 +22,11 @@ class Organization extends Model
         return $this->hasMany(OrganizationInvitation::class);
     }
 
+    public function members()
+    {
+        return $this->belongsToMany(User::class, 'organization_user');
+    }
+
     protected function casts(): array
     {
         return [
