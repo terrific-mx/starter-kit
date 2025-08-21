@@ -16,19 +16,17 @@ new class extends Component {
 
     public function mount()
     {
-        $user = $this->user;
-        $this->currentOrganization = $user->currentOrganization;
-        $this->organizations = $user->organizations;
+        $this->currentOrganization = $this->user->currentOrganization;
+        $this->organizations = $this->user->organizations;
     }
 
     public function switchOrganization($organizationId)
     {
-        $user = $this->user;
-        $organization = $user->organizations->firstWhere('id', $organizationId);
+        $organization = $this->user->organizations->firstWhere('id', $organizationId);
         if (! $organization) {
             abort(403);
         }
-        $user->switchOrganization($organization);
+        $this->user->switchOrganization($organization);
         $this->currentOrganization = $organization;
     }
 }; ?>
