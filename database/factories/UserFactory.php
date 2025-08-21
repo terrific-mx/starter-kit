@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Cashier\Subscription;
 use Laravel\Cashier\SubscriptionItem;
+use App\Models\Organization;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -61,6 +62,22 @@ class UserFactory extends Factory
                     'stripe_price' => config('services.stripe.price_id'),
                     'quantity' => 1,
                 ])
+                ->create();
+        });
+    }
+
+    /**
+     * Indicate that the user has a personal organization and sets it as current.
+     */
+    public function withPersonalOrganization(array $overrides = []): static
+    {
+        return $this->afterCreating(function ($user) use ($overrides) {
+            Organization::factory()
+                ->state(array_merge([
+                    'user_id' => $user->id,
+                    'personal' => true,
+                    'name' => $user->name,
+                ], $overrides))
                 ->create();
         });
     }
