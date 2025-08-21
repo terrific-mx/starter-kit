@@ -23,9 +23,7 @@ new class extends Component {
 
     public function switchOrganization(Organization $organization)
     {
-        if (! $this->user->organizations->contains($organization)) {
-            abort(403);
-        }
+        $this->authorize('switch', $organization);
         $this->user->switchOrganization($organization);
         $this->currentOrganization = $organization;
     }
