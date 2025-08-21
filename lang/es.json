@@ -75,5 +75,9 @@
   "Hello!": "¡Hola!",
   "You have been invited to join the organization \":organization\".": "Has sido invitado a unirte a la organización \":organization\".",
   "Accept Invitation": "Aceptar invitación",
-  "If you do not wish to join, you may ignore this email.": "Si no deseas unirte, puedes ignorar este correo."
+  "If you do not wish to join, you may ignore this email.": "Si no deseas unirte, puedes ignorar este correo.",
+  "Invite Member": "Invitar miembro",
+  "Email address": "Correo electrónico",
+  "Enter member email": "Ingresa el correo del miembro",
+  "Send Invitation": "Enviar invitación"
 }
