@@ -8,6 +8,7 @@ use App\Models\Organization;
 new class extends Component {
     public $currentOrganization;
     public $organizations;
+    public $selectedOrganizationId;
 
     #[Computed]
     public function user() {
@@ -18,17 +19,26 @@ new class extends Component {
     {
         $this->currentOrganization = $this->user->currentOrganization;
         $this->organizations = $this->user->organizations;
+        $this->selectedOrganizationId = $this->currentOrganization?->id;
     }
 
     public function switchOrganization(Organization $organization)
     {
         $this->authorize('switch', $organization);
-
         $this->user->switchOrganization($organization);
-
         $this->currentOrganization = $organization;
-
+        $this->selectedOrganizationId = $organization->id;
         return $this->redirectRoute('dashboard', navigate: true);
+    }
+
+    public function updatedSelectedOrganizationId($id)
+    {
+        if ($id !== $this->currentOrganization?->id) {
+            $organization = $this->organizations->firstWhere('id', $id);
+            if ($organization) {
+                $this->switchOrganization($organization);
+            }
+        }
     }
 }; ?>
 
@@ -37,11 +47,9 @@ new class extends Component {
         :name="$currentOrganization?->name ?? __('No organization')"
     />
     <flux:menu>
-        <flux:menu.radio.group>
+        <flux:menu.radio.group wire:model="selectedOrganizationId">
             @foreach($organizations as $organization)
-                <flux:menu.radio
-                    :checked="$currentOrganization->is($organization)"
-                >
+                <flux:menu.radio :value="$organization->id">
                     {{ $organization->name }}
                 </flux:menu.radio>
             @endforeach
