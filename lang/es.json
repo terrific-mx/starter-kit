@@ -81,5 +81,8 @@
   "Enter member email": "Ingresa el correo del miembro",
   "Send Invitation": "Enviar invitación",
   "Invitation sent": "Invitación enviada",
-  "The invitation was sent to :email.": "La invitación fue enviada a :email."
+  "The invitation was sent to :email.": "La invitación fue enviada a :email.",
+  "Pending Invitations": "Invitaciones pendientes",
+  "These are the invitations you have sent to join your organization. You can manage them here.": "Estas son las invitaciones que has enviado para unirte a tu organización. Puedes gestionarlas aquí.",
+  "Invite a new member to your organization by entering their email address below.": "Invita a un nuevo miembro a tu organización ingresando su correo electrónico abajo."
 }
