@@ -12,11 +12,16 @@ class OrganizationInvitation extends Notification
     use Queueable;
 
     /**
+     * The organization invitation instance.
+     */
+    public $invitation;
+
+    /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($invitation)
     {
-        //
+        $this->invitation = $invitation;
     }
 
     /**
@@ -34,10 +39,16 @@ class OrganizationInvitation extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $invitation = $this->invitation;
+        $organization = $invitation->organization;
+        $acceptUrl = url()->signedRoute('organizations.invitations.accept', $invitation);
+
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+            ->subject(__('You have been invited to join :organization', ['organization' => $organization->name]))
+            ->greeting(__('Hello!'))
+            ->line(__('You have been invited to join the organization ":organization".', ['organization' => $organization->name]))
+            ->action(__('Accept Invitation'), $acceptUrl)
+            ->line(__('If you do not wish to join, you may ignore this email.'));
     }
 
     /**
