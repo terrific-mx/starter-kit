@@ -26,6 +26,14 @@ class OrganizationPolicy
         return $user->organizations->contains($organization);
     }
 
+    /**
+     * Determine whether the user can update the organization.
+     */
+    public function update(User $user, Organization $organization): bool
+    {
+        return $organization->user_id === $user->id;
+    }
+
     public function __construct()
     {
         //
