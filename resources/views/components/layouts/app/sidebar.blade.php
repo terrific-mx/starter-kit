@@ -13,6 +13,12 @@
                 <flux:navlist.item icon="home" :href="route('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
             </flux:navlist>
 
+            <flux:navlist>
+                <flux:navlist.group :heading="__('Organization')" variant="outline">
+                    <flux:navlist.item icon="cog-6-tooth" :href="route('organization.show')" wire:navigate>{{ __('Settings') }}</flux:navlist.item>
+                </flux:navlist.group>
+            </flux:navlist>
+
             <flux:spacer />
 
             <!-- Desktop User Menu -->

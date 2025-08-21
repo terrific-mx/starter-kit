@@ -4,7 +4,6 @@
   "Enter a name for your new organization.": "Ingresa un nombre para tu nueva organización.",
   "Organization Name": "Nombre de la organización",
   "Acme Inc": "Acme Inc",
-  "Cancel": "Cancelar",
   "Create": "Crear",
   "New organization": "Nueva organización",
   "Login": "Iniciar sesión",
@@ -66,5 +65,6 @@
   "Your email address is unverified.": "Tu dirección de correo no está verificada.",
   "Click here to re-send the verification email.": "Haz clic aquí para reenviar el correo de verificación.",
   "A new verification link has been sent to your email address.": "Se ha enviado un nuevo enlace de verificación a tu correo electrónico.",
-  "Manage your profile and account settings": "Administra tu perfil y la configuración de tu cuenta"
+  "Manage your profile and account settings": "Administra tu perfil y la configuración de tu cuenta",
+  "Organization": "Organización"
 }
