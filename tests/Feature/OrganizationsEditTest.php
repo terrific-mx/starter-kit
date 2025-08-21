@@ -13,7 +13,7 @@ it('an authenticated user can edit their organization name', function () {
         ]);
 
     Volt::actingAs($user)
-        ->test('organizations.edit')
+        ->test('organizations.edit', ['organization' => $organization])
         ->set('name', 'New Name')
         ->call('edit')
         ->assertHasNoErrors();
