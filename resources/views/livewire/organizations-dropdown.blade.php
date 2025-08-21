@@ -7,7 +7,7 @@ use App\Models\Organization;
 
 new class extends Component {
     public ?Organization $currentOrganization;
-    public $organizations; // Collection|array
+    public \Illuminate\Database\Eloquent\Collection $organizations;
 
     public ?int $selectedOrganizationId;
 
