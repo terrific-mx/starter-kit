@@ -16,6 +16,8 @@ new class extends Component {
 
     public function edit()
     {
+        $this->authorize('update', $this->organization);
+
         $this->validate([
             'name' => ['required'],
         ]);
