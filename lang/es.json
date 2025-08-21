@@ -92,5 +92,7 @@
   "Invite a new member to your organization by entering their email address below.": "Invita a un nuevo miembro a tu organización ingresando su correo electrónico abajo.",
   "Pending": "Pendiente",
   "Status": "Estado",
-  "Revoke": "Revocar"
+  "Revoke": "Revocar",
+  "Invitation revoked": "Invitación revocada",
+  "The invitation for :email was revoked.": "La invitación para :email fue revocada."
 }

@@ -66,6 +66,12 @@ new class extends Component {
 
         $invitation->delete();
 
+        Flux::toast(
+            heading: __('Invitation revoked'),
+            text: __('The invitation for :email was revoked.', ['email' => $invitation->email]),
+            variant: 'success'
+        );
+
         $this->invitations = $this->getInvitations();
     }
 }; ?>
