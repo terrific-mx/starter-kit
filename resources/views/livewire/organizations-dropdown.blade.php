@@ -10,9 +10,19 @@ new class extends Component {
     public function mount()
     {
         $user = Auth::user();
-
         $this->currentOrganization = $user->currentOrganization;
         $this->organizations = $user->organizations;
+    }
+
+    public function switchOrganization($organizationId)
+    {
+        $user = Auth::user();
+        $organization = $user->organizations->firstWhere('id', $organizationId);
+        if (! $organization) {
+            abort(403);
+        }
+        $user->switchOrganization($organization);
+        $this->currentOrganization = $organization;
     }
 }; ?>
 
