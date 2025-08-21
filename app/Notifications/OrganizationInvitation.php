@@ -11,18 +11,7 @@ class OrganizationInvitation extends Notification
 {
     use Queueable;
 
-    /**
-     * The organization invitation instance.
-     */
-    public $invitation;
-
-    /**
-     * Create a new notification instance.
-     */
-    public function __construct($invitation)
-    {
-        $this->invitation = $invitation;
-    }
+    public function __construct(public OrganizationInvitation $invitation) {}
 
     /**
      * Get the notification's delivery channels.
