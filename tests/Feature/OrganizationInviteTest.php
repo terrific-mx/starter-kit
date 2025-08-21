@@ -33,3 +33,32 @@ it('invites a member to an organization by email', function () {
     expect($invitation)->not->toBeNull();
     expect($invitation->email)->toBe($inviteEmail);
 });
+
+it('requires an email to invite a member', function () {
+    Notification::fake();
+    $owner = User::factory()->create();
+    $organization = Organization::factory()->for($owner)->create();
+
+    Volt::actingAs($owner)
+        ->test('organizations.invite', ['organization' => $organization])
+        ->set('email', '')
+        ->call('sendInvitation')
+        ->assertHasErrors(['email' => 'required']);
+});
+
+it('requires the email to be unique for the organization', function () {
+    Notification::fake();
+    $owner = User::factory()->create();
+    $organization = Organization::factory()->for($owner)->create();
+    $inviteEmail = 'invitee@example.com';
+
+    OrganizationInvitation::factory()->for($organization)->create([
+        'email' => $inviteEmail,
+    ]);
+
+    Volt::actingAs($owner)
+        ->test('organizations.invite', ['organization' => $organization])
+        ->set('email', $inviteEmail)
+        ->call('sendInvitation')
+        ->assertHasErrors(['email' => 'unique']);
+});
