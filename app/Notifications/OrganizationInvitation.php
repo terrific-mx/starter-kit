@@ -2,6 +2,8 @@
 
 namespace App\Notifications;
 
+use App\Models\OrganizationInvitation as OrganizationInvitationModel;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -11,7 +13,7 @@ class OrganizationInvitation extends Notification
 {
     use Queueable;
 
-    public function __construct(public OrganizationInvitation $invitation) {}
+    public function __construct(public OrganizationInvitationModel $invitation) {}
 
     /**
      * Get the notification's delivery channels.
