@@ -26,6 +26,8 @@ new class extends Component {
         $this->authorize('switch', $organization);
         $this->user->switchOrganization($organization);
         $this->currentOrganization = $organization;
+
+        return redirect()->route('dashboard');
     }
 }; ?>
 
