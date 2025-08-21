@@ -17,6 +17,14 @@ class OrganizationPolicy
         return true;
     }
 
+    /**
+     * Determine whether the user can switch to the given organization.
+     */
+    public function switch(User $user, \App\Models\Organization $organization): bool
+    {
+        return $user->organizations->contains($organization);
+    }
+
     public function __construct()
     {
         //
