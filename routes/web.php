@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
+    Volt::route('organizations/{organization}/settings/members', 'organizations.invite')->name('organizations.settings.members');
     Volt::route('organizations/{organization}', 'organizations.edit')->name('organizations.show');
 
     Route::get('organizations/invitations/{invitation}/accept', OrganizationInvitationAcceptController::class)
