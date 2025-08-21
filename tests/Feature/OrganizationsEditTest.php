@@ -35,3 +35,21 @@ it('cannot update organization name to empty', function () {
         ->call('edit')
         ->assertHasErrors(['name' => 'required']);
 });
+
+it('forbids non-owners from editing the organization name', function () {
+    $owner = User::factory()->create();
+    $nonOwner = User::factory()->create();
+    $organization = Organization::factory()
+        ->for($owner)
+        ->create([
+            'name' => 'Old Name',
+        ]);
+
+    Volt::actingAs($nonOwner)
+        ->test('organizations.edit', ['organization' => $organization])
+        ->set('name', 'Hacked Name')
+        ->call('edit')
+        ->assertForbidden();
+
+    expect($organization->fresh()->name)->toBe('Old Name');
+});
