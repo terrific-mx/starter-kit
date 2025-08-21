@@ -21,13 +21,11 @@ it('allows an organization owner to invite a member to their organization by ema
         ->call('sendInvitation')
         ->assertHasNoErrors();
 
-    Notification::assertSentTo(
-        new class($inviteEmail) {
-            public $email;
-            public function __construct($email) { $this->email = $email; }
-            public function routeNotificationForMail() { return $this->email; }
-        },
-        OrganizationInvitation::class
+    Notification::assertSentOnDemand(
+        OrganizationInvitation::class,
+        function ($notification, $channels, $notifiable) use ($inviteEmail) {
+            return $notifiable->routes['mail'] === $inviteEmail;
+        }
     );
 
     $invitation = $organization->invitations()->first();
