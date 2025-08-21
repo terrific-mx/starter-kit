@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('organization_id')->constrained()->cascadeOnDelete();
             $table->string('email');
+            $table->unique(['organization_id', 'email']);
             $table->timestamps();
         });
     }
