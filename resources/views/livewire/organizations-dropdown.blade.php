@@ -6,10 +6,10 @@ use Livewire\Attributes\Computed;
 use App\Models\Organization;
 
 new class extends Component {
-    public $currentOrganization;
-    public $organizations;
+    public ?Organization $currentOrganization;
+    public $organizations; // Collection|array
 
-    public $selectedOrganizationId;
+    public ?int $selectedOrganizationId;
 
     #[Computed]
     public function user() {
