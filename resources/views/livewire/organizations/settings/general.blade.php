@@ -34,41 +34,10 @@ new class extends Component {
 }; ?>
 
 <div>
-    <flux:breadcrumbs class="mb-6">
-        <flux:breadcrumbs.item href="{{ route('home') }}">{{ __('Home') }}</flux:breadcrumbs.item>
-        <flux:breadcrumbs.item href="{{ route('organizations.show', $organization) }}">{{ $organization->name }}</flux:breadcrumbs.item>
-        <flux:breadcrumbs.item href="{{ route('organizations.settings.general', $organization) }}">{{ __('Settings') }}</flux:breadcrumbs.item>
-        <flux:breadcrumbs.item>{{ __('General') }}</flux:breadcrumbs.item>
-    </flux:breadcrumbs>
-    <div class="mb-8">
-        <flux:heading size="lg">
-            {{ __('Organization Settings') }}
-        </flux:heading>
-        <flux:text class="mt-1">
-            {{ __('Manage all aspects of your organization, including general details and members.') }}
-        </flux:text>
-    </div>
+    @include('partials.organization-settings-breadcrumbs', ['organization' => $organization, 'current' => __('General')])
+    @include('partials.organization-settings-heading')
     <div class="flex flex-col lg:flex-row gap-8">
-        <div class="lg:w-64 lg:shrink-0 mb-8 lg:mb-0">
-            <flux:navlist>
-                <flux:navlist.item
-                    icon="cog-6-tooth"
-                    :href="route('organizations.settings.general', $organization)"
-                    :current="request()->routeIs('organizations.settings.general')"
-                    wire:navigate
-                >
-                    {{ __('General') }}
-                </flux:navlist.item>
-                <flux:navlist.item
-                    icon="layout-grid"
-                    :href="route('organizations.settings.members', $organization)"
-                    :current="request()->routeIs('organizations.settings.members')"
-                    wire:navigate
-                >
-                    {{ __('Members') }}
-                </flux:navlist.item>
-            </flux:navlist>
-        </div>
+        @include('partials.organization-settings-sidebar', ['organization' => $organization])
         <div class="flex-1">
             <div class="mb-6">
                 <flux:heading size="lg">
@@ -86,5 +55,4 @@ new class extends Component {
             </form>
         </div>
     </div>
-
 </div>
