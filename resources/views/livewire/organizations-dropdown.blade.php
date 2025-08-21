@@ -4,10 +4,11 @@ use Livewire\Volt\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use App\Models\Organization;
+use Illuminate\Database\Eloquent\Collection;
 
 new class extends Component {
     public ?Organization $currentOrganization;
-    public \Illuminate\Database\Eloquent\Collection $organizations;
+    public Collection $organizations;
 
     public ?int $selectedOrganizationId;
 
