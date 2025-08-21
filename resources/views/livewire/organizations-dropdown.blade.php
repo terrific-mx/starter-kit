@@ -3,6 +3,7 @@
 use Livewire\Volt\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
+use App\Models\Organization;
 
 new class extends Component {
     public $currentOrganization;
