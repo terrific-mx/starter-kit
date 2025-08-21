@@ -8,6 +8,7 @@ use App\Models\Organization;
 new class extends Component {
     public $currentOrganization;
     public $organizations;
+
     public $selectedOrganizationId;
 
     #[Computed]
@@ -25,10 +26,10 @@ new class extends Component {
     public function switchOrganization(Organization $organization)
     {
         $this->authorize('switch', $organization);
+
         $this->user->switchOrganization($organization);
-        $this->currentOrganization = $organization;
-        $this->selectedOrganizationId = $organization->id;
-        return $this->redirectRoute('dashboard', navigate: true);
+
+        $this->redirectRoute('dashboard', navigate: true);
     }
 
     public function updatedSelectedOrganizationId(Organization $organization)
