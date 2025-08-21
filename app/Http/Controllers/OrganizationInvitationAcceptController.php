@@ -15,7 +15,7 @@ class OrganizationInvitationAcceptController extends Controller
         $user = Auth::user();
         $organization = $invitation->organization;
 
-        $organization->members()->attach($user->id);
+        $organization->addMember($user);
         $invitation->delete();
 
         return redirect()->route('dashboard');

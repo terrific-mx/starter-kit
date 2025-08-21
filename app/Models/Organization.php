@@ -27,6 +27,11 @@ class Organization extends Model
         return $this->belongsToMany(User::class, 'organization_user');
     }
 
+    public function addMember(User $user): void
+    {
+        $this->members()->attach($user->id);
+    }
+
     protected function casts(): array
     {
         return [
