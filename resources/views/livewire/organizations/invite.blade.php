@@ -16,7 +16,7 @@ new class extends Component {
 
     public function mount()
     {
-        $this->invitations = $this->organization->invitations()->latest()->get();
+        $this->invitations = $this->getInvitations();
     }
 
     public function rules(): array
@@ -51,7 +51,12 @@ new class extends Component {
 
         $this->reset('email');
 
-        $this->invitations = $this->organization->invitations()->latest()->get();
+        $this->invitations = $this->getInvitations();
+    }
+
+    private function getInvitations(): Collection
+    {
+        return $this->organization->invitations()->latest()->get();
     }
 }; ?>
 
