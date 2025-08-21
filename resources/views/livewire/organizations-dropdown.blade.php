@@ -2,26 +2,28 @@
 
 use Livewire\Volt\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Computed;
 
 new class extends Component {
     public $currentOrganization;
     public $organizations;
 
-    // Locked computed property for the authenticated user
-    protected function user() {
+    // Computed property for the authenticated user
+    #[Computed]
+    public function user() {
         return Auth::user();
     }
 
     public function mount()
     {
-        $user = $this->user();
+        $user = $this->user;
         $this->currentOrganization = $user->currentOrganization;
         $this->organizations = $user->organizations;
     }
 
     public function switchOrganization($organizationId)
     {
-        $user = $this->user();
+        $user = $this->user;
         $organization = $user->organizations->firstWhere('id', $organizationId);
         if (! $organization) {
             abort(403);
