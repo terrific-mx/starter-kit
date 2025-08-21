@@ -7,16 +7,21 @@ new class extends Component {
     public $currentOrganization;
     public $organizations;
 
+    // Locked computed property for the authenticated user
+    protected function user() {
+        return Auth::user();
+    }
+
     public function mount()
     {
-        $user = Auth::user();
+        $user = $this->user();
         $this->currentOrganization = $user->currentOrganization;
         $this->organizations = $user->organizations;
     }
 
     public function switchOrganization($organizationId)
     {
-        $user = Auth::user();
+        $user = $this->user();
         $organization = $user->organizations->firstWhere('id', $organizationId);
         if (! $organization) {
             abort(403);
