@@ -20,10 +20,9 @@ new class extends Component {
         $this->organizations = $this->user->organizations;
     }
 
-    public function switchOrganization($organizationId)
+    public function switchOrganization(\App\Models\Organization $organization)
     {
-        $organization = $this->user->organizations->firstWhere('id', $organizationId);
-        if (! $organization) {
+        if (! $this->user->organizations->contains($organization)) {
             abort(403);
         }
         $this->user->switchOrganization($organization);
