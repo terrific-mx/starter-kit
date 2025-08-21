@@ -27,7 +27,7 @@ new class extends Component {
         $this->user->switchOrganization($organization);
         $this->currentOrganization = $organization;
 
-        return $this->redirectRoute('dashboard');
+        return $this->redirectRoute('dashboard', navigate: true);
     }
 }; ?>
 
