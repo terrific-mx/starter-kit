@@ -2,14 +2,16 @@
 
 use Livewire\Volt\Component;
 
-new class extends Component {
-    public $name;
-    public $organization;
+use App\Models\Organization;
 
-    public function mount($organization)
+new class extends Component {
+    public Organization $organization;
+
+    public string $name;
+
+    public function mount()
     {
-        $this->organization = $organization;
-        $this->name = $organization->name;
+        $this->name = $this->organization->name;
     }
 
     public function edit()
