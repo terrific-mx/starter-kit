@@ -6,11 +6,10 @@ use App\Models\OrganizationInvitation;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Volt\Volt;
-use App\Notifications\OrganizationInvitation;
 
 uses(RefreshDatabase::class);
 
-test('an organization owner can invite a member by email using the organization invite volt component', function () {
+it('allows an organization owner to invite a member to their organization by email using the Volt invitation component', function () {
     Notification::fake();
     $owner = User::factory()->create();
     $organization = Organization::factory()->for($owner)->create();
