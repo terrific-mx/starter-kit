@@ -21,7 +21,7 @@ new class extends Component {
         $this->organizations = $this->user->organizations;
     }
 
-    public function switchOrganization(\App\Models\Organization $organization)
+    public function switchOrganization(Organization $organization)
     {
         if (! $this->user->organizations->contains($organization)) {
             abort(403);
