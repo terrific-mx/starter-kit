@@ -37,7 +37,7 @@ new class extends Component {
         ]);
 
         Notification::route('mail', $this->email)
-            ->notify(new OrganizationInvitationNotification());
+            ->notify(new OrganizationInvitationNotification($invitation));
     }
 }; ?>
 
