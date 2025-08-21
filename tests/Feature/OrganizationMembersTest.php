@@ -63,16 +63,30 @@ it('requires the email to be unique for the organization', function () {
         ->assertHasErrors(['email' => 'unique']);
 });
 
-it('forbids non-owners from sending organization invitations', function () {
-    Notification::fake();
+it('allows the owner to revoke a pending invitation', function () {
+    $owner = User::factory()->withPersonalOrganization()->create();
+    $organization = Organization::factory()->for($owner)->create();
+    $inviteEmail = 'invitee@example.com';
+    $invitation = OrganizationInvitation::factory()->for($organization)->create([
+        'email' => $inviteEmail,
+    ]);
+
+    Volt::actingAs($owner)
+        ->test('organizations.settings.members', ['organization' => $organization])
+        ->call('revokeInvitation', $invitation->id)
+        ->assertHasNoErrors();
+
+    expect($organization->invitations()->find($invitation->id))->toBeNull();
+});
+
+it('forbids non-owners from revoking invitations', function () {
     $owner = User::factory()->withPersonalOrganization()->create();
     $organization = Organization::factory()->for($owner)->create();
     $nonOwner = User::factory()->withPersonalOrganization()->create();
-    $inviteEmail = 'invitee@example.com';
+    $invitation = OrganizationInvitation::factory()->for($organization)->create();
 
     Volt::actingAs($nonOwner)
         ->test('organizations.settings.members', ['organization' => $organization])
-        ->set('email', $inviteEmail)
-        ->call('sendInvitation')
+        ->call('revokeInvitation', $invitation->id)
         ->assertForbidden();
 });
