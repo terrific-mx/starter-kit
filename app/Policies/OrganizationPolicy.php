@@ -31,7 +31,7 @@ class OrganizationPolicy
      */
     public function update(User $user, Organization $organization): bool
     {
-        return $organization->user_id === $user->id;
+        return $organization->user->is($user);
     }
 
     public function __construct()
