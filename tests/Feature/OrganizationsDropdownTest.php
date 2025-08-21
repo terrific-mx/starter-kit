@@ -8,6 +8,7 @@ it('allows user to switch organizations from the dropdown', function () {
     $user = User::factory()->has(Organization::factory()->count(2))->create();
     $orgA = $user->organizations->first();
     $orgB = $user->organizations->skip(1)->first();
+
     $user->switchOrganization($orgA);
     expect($user->fresh()->currentOrganization->is($orgA))->toBeTrue();
 
