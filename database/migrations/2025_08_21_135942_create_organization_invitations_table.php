@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('organization_invitations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('organization_id')->constrained()->cascadeOnDelete();
-$table->string('email');
-$table->timestamps();
+            $table->string('email');
+            $table->timestamps();
         });
     }
 

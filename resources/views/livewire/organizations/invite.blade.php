@@ -1,6 +1,10 @@
 <?php
 
 use Livewire\Volt\Component;
+use App\Models\Organization;
+use App\Models\OrganizationInvitation;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\OrganizationInvitation as OrganizationInvitationNotification;
 
 new class extends Component {
     public string $email = '';
@@ -13,8 +17,8 @@ new class extends Component {
             'email' => $this->email,
         ]);
 
-        \Notification::route('mail', $this->email)
-            ->notify(new \App\Notifications\OrganizationInvitation());
+        Notification::route('mail', $this->email)
+            ->notify(new OrganizationInvitationNotification());
     }
 }; ?>
 
