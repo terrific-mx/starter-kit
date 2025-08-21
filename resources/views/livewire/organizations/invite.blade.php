@@ -5,6 +5,7 @@ use App\Models\Organization;
 use App\Models\OrganizationInvitation;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\OrganizationInvitation as OrganizationInvitationNotification;
+use Illuminate\Validation\Rule;
 
 new class extends Component {
     public Organization $organization;
@@ -17,7 +18,9 @@ new class extends Component {
             'email' => [
                 'required',
                 'email',
-                'unique:organization_invitations,email,NULL,id,organization_id,' . $this->organization->id,
+                Rule::unique('organization_invitations', 'email')->where(
+                    fn ($query) => $query->where('organization_id', $this->organization->id)
+                ),
             ],
         ];
     }
