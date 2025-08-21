@@ -2,7 +2,7 @@
 
 use Livewire\Volt\Component;
 use App\Models\Organization;
-use App\Models\OrganizationInvitation;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\OrganizationInvitation as OrganizationInvitationNotification;
 use Flux\Flux;
@@ -12,11 +12,11 @@ new class extends Component {
     public Organization $organization;
 
     public string $email = '';
-    public $invitations;
+    public Collection $invitations;
 
     public function mount()
     {
-        $this->invitations = $this->organization->invitations;
+        $this->invitations = $this->organization->invitations()->latest()->get();
     }
 
     public function rules(): array
@@ -50,6 +50,8 @@ new class extends Component {
         );
 
         $this->reset('email');
+
+        $this->invitations = $this->organization->invitations()->latest()->get();
     }
 }; ?>
 
