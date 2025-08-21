@@ -16,6 +16,9 @@ new class extends Component {
 
     public function edit()
     {
+        $this->validate([
+            'name' => ['required'],
+        ]);
         $this->organization->update(['name' => $this->name]);
     }
 }; ?>
