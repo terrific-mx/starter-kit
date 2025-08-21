@@ -17,7 +17,7 @@ it('invites a member to an organization by email', function () {
     $inviteEmail = 'invitee@example.com';
 
     Volt::actingAs($owner)
-        ->test('organizations.invite', ['organization' => $organization])
+        ->test('organizations.members', ['organization' => $organization])
         ->set('email', $inviteEmail)
         ->call('sendInvitation')
         ->assertHasNoErrors();
@@ -40,7 +40,7 @@ it('requires an email to invite a member', function () {
     $organization = Organization::factory()->for($owner)->create();
 
     Volt::actingAs($owner)
-        ->test('organizations.invite', ['organization' => $organization])
+        ->test('organizations.members', ['organization' => $organization])
         ->set('email', '')
         ->call('sendInvitation')
         ->assertHasErrors(['email' => 'required']);
@@ -57,7 +57,7 @@ it('requires the email to be unique for the organization', function () {
     ]);
 
     Volt::actingAs($owner)
-        ->test('organizations.invite', ['organization' => $organization])
+        ->test('organizations.members', ['organization' => $organization])
         ->set('email', $inviteEmail)
         ->call('sendInvitation')
         ->assertHasErrors(['email' => 'unique']);
@@ -71,7 +71,7 @@ it('forbids non-owners from sending organization invitations', function () {
     $inviteEmail = 'invitee@example.com';
 
     Volt::actingAs($nonOwner)
-        ->test('organizations.invite', ['organization' => $organization])
+        ->test('organizations.members', ['organization' => $organization])
         ->set('email', $inviteEmail)
         ->call('sendInvitation')
         ->assertForbidden();

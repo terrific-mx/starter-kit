@@ -10,9 +10,9 @@ use Illuminate\Validation\Rule;
 
 new class extends Component {
     public Organization $organization;
+    public Collection $invitations;
 
     public string $email = '';
-    public Collection $invitations;
 
     public function mount()
     {
