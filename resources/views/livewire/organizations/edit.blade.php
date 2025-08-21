@@ -3,6 +3,7 @@
 use Livewire\Volt\Component;
 
 use App\Models\Organization;
+use Flux\Flux;
 
 new class extends Component {
     public Organization $organization;
@@ -23,6 +24,12 @@ new class extends Component {
         ]);
 
         $this->organization->update(['name' => $this->name]);
+
+        Flux::toast(
+            heading: __('Saved'),
+            text: __('Organization updated successfully.'),
+            variant: 'success'
+        );
     }
 }; ?>
 
