@@ -87,7 +87,7 @@ it('allows the owner to revoke a pending invitation', function () {
 
     Volt::actingAs($owner)
         ->test('organizations.settings.members', ['organization' => $organization])
-        ->call('revokeInvitation', $invitation->id)
+        ->call('revokeInvitation', $invitation)
         ->assertHasNoErrors();
 
     expect($organization->invitations()->find($invitation->id))->toBeNull();
@@ -101,6 +101,6 @@ it('forbids non-owners from revoking invitations', function () {
 
     Volt::actingAs($nonOwner)
         ->test('organizations.settings.members', ['organization' => $organization])
-        ->call('revokeInvitation', $invitation->id)
+        ->call('revokeInvitation', $invitation)
         ->assertForbidden();
 });

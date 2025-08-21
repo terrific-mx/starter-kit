@@ -2,6 +2,7 @@
 
 use Livewire\Volt\Component;
 use App\Models\Organization;
+use App\Models\OrganizationInvitation;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\OrganizationInvitation as OrganizationInvitationNotification;
@@ -59,17 +60,12 @@ new class extends Component {
         return $this->organization->invitations()->latest()->get();
     }
 
-    public function revokeInvitation(int $invitationId): void
+    public function revokeInvitation(OrganizationInvitation $invitation): void
     {
-        if (auth()->id() !== $this->organization->user_id) {
+        if (auth()->id() !== $invitation->organization->user_id) {
             abort(403);
         }
-
-        $invitation = $this->organization->invitations()->find($invitationId);
-        if ($invitation) {
-            $invitation->delete();
-        }
-
+        $invitation->delete();
         $this->invitations = $this->getInvitations();
     }
 }; ?>
