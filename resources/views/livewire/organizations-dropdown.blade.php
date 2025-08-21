@@ -33,9 +33,7 @@ new class extends Component {
 
     public function updatedSelectedOrganizationId(Organization $organization)
     {
-        if ($organization->id !== $this->currentOrganization?->id) {
-            $this->switchOrganization($organization);
-        }
+        $this->switchOrganization($organization);
     }
 }; ?>
 
