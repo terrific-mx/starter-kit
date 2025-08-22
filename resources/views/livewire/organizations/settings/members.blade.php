@@ -116,8 +116,15 @@ new class extends Component {
                                             <flux:text class="max-sm:hidden">{{ $member->email }}</flux:text>
                                         </div>
                                     </div>
-                                </flux:table.cell>
-                            </flux:table.row>
+                                 </flux:table.cell>
+                                 <flux:table.cell align="end">
+                                     @if (auth()->id() !== $member->id)
+                                         <flux:button variant="subtle" size="sm" wire:click="removeMember({{ $member->id }})">
+                                             {{ __('Remove') }}
+                                         </flux:button>
+                                     @endif
+                                 </flux:table.cell>
+                             </flux:table.row>
                         @endforeach
                     </flux:table.rows>
                 </flux:table>
