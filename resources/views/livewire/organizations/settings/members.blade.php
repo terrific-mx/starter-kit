@@ -13,12 +13,14 @@ use Illuminate\Validation\Rule;
 new class extends Component {
     public Organization $organization;
     public Collection $invitations;
+    public Collection $members;
 
     public string $email = '';
 
     public function mount()
     {
         $this->invitations = $this->getInvitations();
+        $this->members = $this->getMembers();
     }
 
     public function rules(): array
@@ -68,6 +70,19 @@ new class extends Component {
         abort_unless($this->organization->isMember($member), 403);
 
         $this->organization->removeMember($member);
+
+        Flux::toast(
+            heading: __('Member removed'),
+            text: __('The member :name was removed from the organization.', ['name' => $member->name]),
+            variant: 'success'
+        );
+
+        $this->members = $this->getMembers();
+    }
+
+    private function getMembers(): Collection
+    {
+        return $this->organization->members()->get();
     }
 
     public function revokeInvitation(OrganizationInvitation $invitation): void
@@ -97,37 +112,51 @@ new class extends Component {
                     <flux:heading size="lg">{{ __('Organization Members') }}</flux:heading>
                     <flux:text class="mt-1">{{ __('These are all the members in your organization.') }}</flux:text>
                 </header>
-                <flux:table class="mt-4">
-                    <flux:table.columns>
-                        <flux:table.column>{{ __('Member') }}</flux:table.column>
-                    </flux:table.columns>
-                    <flux:table.rows>
-                        @foreach ($organization->members as $member)
-                            <flux:table.row>
-                                <flux:table.cell>
-                                    <div class="flex items-center gap-2 sm:gap-4">
-                                        <flux:avatar :name="$member->name" class="max-sm:size-8" circle />
-                                        <div class="flex flex-col">
-                                            <flux:heading>{{ $member->name }}
-                                                @if (auth()->id() === $member->id)
-                                                    <flux:badge size="sm" color="blue" class="ml-1 max-sm:hidden">{{ __('You') }}</flux:badge>
-                                                @endif
-                                            </flux:heading>
-                                            <flux:text class="max-sm:hidden">{{ $member->email }}</flux:text>
-                                        </div>
-                                    </div>
-                                 </flux:table.cell>
-                                 <flux:table.cell align="end">
-                                     @if (auth()->id() !== $member->id)
-                                         <flux:button variant="subtle" size="sm" wire:click="removeMember({{ $member->id }})">
-                                             {{ __('Remove') }}
-                                         </flux:button>
-                                     @endif
-                                 </flux:table.cell>
-                             </flux:table.row>
-                        @endforeach
-                    </flux:table.rows>
-                </flux:table>
+                <div class="mt-4">
+                    @if ($members->isEmpty())
+                        <div class="flex flex-col items-center justify-center py-8">
+                            <flux:text>
+                                <flux:icon name="user" variant="mini" class="mb-4" />
+                            </flux:text>
+                            <flux:heading size="md" class="mb-1">{{ __('No organization members') }}</flux:heading>
+                            <flux:text class="mt-1">
+                                {{ __('Invite someone to join your organization by sending them an invitation below.') }}
+                            </flux:text>
+                        </div>
+                    @else
+                        <flux:table>
+                            <flux:table.columns>
+                                <flux:table.column>{{ __('Member') }}</flux:table.column>
+                            </flux:table.columns>
+                            <flux:table.rows>
+                                @foreach ($members as $member)
+                                    <flux:table.row>
+                                        <flux:table.cell>
+                                            <div class="flex items-center gap-2 sm:gap-4">
+                                                <flux:avatar :name="$member->name" class="max-sm:size-8" circle />
+                                                <div class="flex flex-col">
+                                                    <flux:heading>{{ $member->name }}
+                                                        @if (auth()->id() === $member->id)
+                                                            <flux:badge size="sm" color="blue" class="ml-1 max-sm:hidden">{{ __('You') }}</flux:badge>
+                                                        @endif
+                                                    </flux:heading>
+                                                    <flux:text class="max-sm:hidden">{{ $member->email }}</flux:text>
+                                                </div>
+                                            </div>
+                                        </flux:table.cell>
+                                        <flux:table.cell align="end">
+                                            @if (auth()->id() !== $member->id)
+                                                <flux:button variant="subtle" size="sm" wire:click="removeMember({{ $member->id }})">
+                                                    {{ __('Remove') }}
+                                                </flux:button>
+                                            @endif
+                                        </flux:table.cell>
+                                    </flux:table.row>
+                                @endforeach
+                            </flux:table.rows>
+                        </flux:table>
+                    @endif
+                </div>
             </section>
             <section class="mt-8">
                 <header>
