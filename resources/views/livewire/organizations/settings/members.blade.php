@@ -65,9 +65,7 @@ new class extends Component {
     {
         $this->authorize('removeMember', $this->organization);
 
-        if (! $this->organization->isMember($member)) {
-            abort(403);
-        }
+        abort_unless($this->organization->isMember($member), 403);
 
         $this->organization->removeMember($member);
     }
