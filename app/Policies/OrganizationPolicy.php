@@ -42,6 +42,14 @@ class OrganizationPolicy
         return $organization->user->is($user);
     }
 
+    /**
+     * Determine whether the user can remove members from the organization.
+     */
+    public function removeMember(User $user, Organization $organization): bool
+    {
+        return $organization->user->is($user);
+    }
+
     public function __construct()
     {
         //
