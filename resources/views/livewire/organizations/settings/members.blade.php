@@ -83,7 +83,7 @@ new class extends Component {
         @include('partials.organization-settings-sidebar', ['organization' => $organization])
         <div class="flex-1">
             <div class="space-y-6">
-                <section class="mb-8">
+                <section class="max-w-lg mb-8">
                     <header>
                         <flux:heading size="lg">{{ __('Organization Members') }}</flux:heading>
                         <flux:text class="mt-1">{{ __('These are all the members in your organization.') }}</flux:text>
