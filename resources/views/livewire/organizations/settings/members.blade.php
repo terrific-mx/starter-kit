@@ -69,7 +69,7 @@ new class extends Component {
             abort(403);
         }
 
-        $this->organization->members()->detach($member->id);
+        $this->organization->removeMember($member);
     }
 
     public function revokeInvitation(OrganizationInvitation $invitation): void

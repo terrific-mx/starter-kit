@@ -32,6 +32,11 @@ class Organization extends Model
         $this->members()->attach($user->id);
     }
 
+    public function removeMember(User $user): void
+    {
+        $this->members()->detach($user->id);
+    }
+
     public function inviteMember(string $email): OrganizationInvitation
     {
         return $this->invitations()->create([
