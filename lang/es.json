@@ -94,5 +94,7 @@
   "Status": "Estado",
   "Revoke": "Revocar",
   "Invitation revoked": "Invitación revocada",
-  "The invitation for :email was revoked.": "La invitación para :email fue revocada."
+  "The invitation for :email was revoked.": "La invitación para :email fue revocada.",
+  "No pending invitations": "No hay invitaciones pendientes",
+  "You haven't sent any invitations yet.": "Aún no has enviado ninguna invitación."
 }

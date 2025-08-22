@@ -106,31 +106,41 @@ new class extends Component {
                 </form>
             </div>
             <div class="max-w-lg mt-8">
-                <div class="mb-4">
-                    <flux:heading size="lg">{{ __('Pending Invitations') }}</flux:heading>
-                    <flux:text class="mt-1">{{ __('These are the invitations you have sent to join your organization. You can manage them here.') }}</flux:text>
-                </div>
-                <flux:table>
-                    <flux:table.columns>
-                         <flux:table.column>{{ __('Email address') }}</flux:table.column>
-                         <flux:table.column>{{ __('Status') }}</flux:table.column>
-                    </flux:table.columns>
-                    <flux:table.rows>
-                        @foreach ($invitations as $invitation)
-                             <flux:table.row>
-                                 <flux:table.cell>{{ $invitation->email }}</flux:table.cell>
-                                 <flux:table.cell>
-                                     <flux:badge color="zinc" size="sm">{{ __('Pending') }}</flux:badge>
-                                 </flux:table.cell>
-                                 <flux:table.cell align="end">
-                                     <flux:button color="danger" variant="subtle" size="sm" wire:click="revokeInvitation({{ $invitation->id }})">
-                                         {{ __('Revoke') }}
-                                     </flux:button>
-                                 </flux:table.cell>
-                             </flux:table.row>
-                        @endforeach
-                    </flux:table.rows>
-                </flux:table>
+                 <div class="mb-4">
+                     <flux:heading size="lg">{{ __('Pending Invitations') }}</flux:heading>
+                     <flux:text class="mt-1">{{ __('These are the invitations you have sent to join your organization. You can manage them here.') }}</flux:text>
+                 </div>
+                 @if ($invitations->isEmpty())
+<div class="flex flex-col items-center justify-center py-8">
+    <flux:text>
+        <flux:icon name="user-plus" size="xl" variant="mini" />
+    </flux:text>
+    <flux:heading size="md">{{ __('No pending invitations') }}</flux:heading>
+    <flux:text>{{ __('You haven\'t sent any invitations yet.') }}</flux:text>
+</div>
+                 @else
+                     <flux:table>
+                         <flux:table.columns>
+                              <flux:table.column>{{ __('Email address') }}</flux:table.column>
+                              <flux:table.column>{{ __('Status') }}</flux:table.column>
+                         </flux:table.columns>
+                         <flux:table.rows>
+                             @foreach ($invitations as $invitation)
+                                  <flux:table.row>
+                                      <flux:table.cell>{{ $invitation->email }}</flux:table.cell>
+                                      <flux:table.cell>
+                                          <flux:badge color="zinc" size="sm">{{ __('Pending') }}</flux:badge>
+                                      </flux:table.cell>
+                                      <flux:table.cell align="end">
+                                          <flux:button color="danger" variant="subtle" size="sm" wire:click="revokeInvitation({{ $invitation->id }})">
+                                              {{ __('Revoke') }}
+                                          </flux:button>
+                                      </flux:table.cell>
+                                  </flux:table.row>
+                             @endforeach
+                         </flux:table.rows>
+                     </flux:table>
+                 @endif
             </div>
         </div>
     </div>
