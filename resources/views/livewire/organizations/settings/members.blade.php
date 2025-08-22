@@ -83,6 +83,24 @@ new class extends Component {
         @include('partials.organization-settings-sidebar', ['organization' => $organization])
         <div class="flex-1">
             <div class="space-y-6">
+                <div class="mb-8">
+                    <flux:heading size="lg">{{ __('Organization Members') }}</flux:heading>
+                    <flux:text class="mt-1">{{ __('These are all the members in your organization.') }}</flux:text>
+                    <flux:table class="mt-4">
+                        <flux:table.columns>
+                            <flux:table.column>{{ __('Name') }}</flux:table.column>
+                            <flux:table.column>{{ __('Email address') }}</flux:table.column>
+                        </flux:table.columns>
+                        <flux:table.rows>
+                            @foreach ($organization->members as $member)
+                                <flux:table.row>
+                                    <flux:table.cell>{{ $member->name }}</flux:table.cell>
+                                    <flux:table.cell>{{ $member->email }}</flux:table.cell>
+                                </flux:table.row>
+                            @endforeach
+                        </flux:table.rows>
+                    </flux:table>
+                </div>
                 <div class="mb-4">
                     <flux:heading size="lg">{{ __('Invite Member') }}</flux:heading>
                     <flux:text class="mt-1">{{ __('Invite a new member to your organization by entering their email address below.') }}</flux:text>
