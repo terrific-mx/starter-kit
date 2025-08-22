@@ -111,13 +111,13 @@ new class extends Component {
                      <flux:text class="mt-1">{{ __('These are the invitations you have sent to join your organization. You can manage them here.') }}</flux:text>
                  </div>
                  @if ($invitations->isEmpty())
-<div class="flex flex-col items-center justify-center py-8">
-    <flux:text>
-        <flux:icon name="user-plus" size="xl" variant="mini" />
-    </flux:text>
-    <flux:heading size="md">{{ __('No pending invitations') }}</flux:heading>
-    <flux:text>{{ __('You haven\'t sent any invitations yet.') }}</flux:text>
-</div>
+                    <div class="flex flex-col items-center justify-center py-8">
+                        <flux:text>
+                            <flux:icon name="user-plus" variant="mini" class="mb-4" />
+                        </flux:text>
+                        <flux:heading size="md" class="mb-1">{{ __('No pending invitations') }}</flux:heading>
+                        <flux:text>{{ __('You haven\'t sent any invitations yet.') }}</flux:text>
+                    </div>
                  @else
                      <flux:table>
                          <flux:table.columns>
