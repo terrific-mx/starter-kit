@@ -39,6 +39,30 @@ new class extends Component {
     <div class="flex flex-col lg:flex-row gap-8">
         @include('partials.organization-settings-sidebar', ['organization' => $organization])
         <div class="flex-1">
+            <div class="mb-8">
+                <flux:heading size="lg">
+                    {{ __('Organization Members') }}
+                </flux:heading>
+                <flux:text class="mt-1 mb-4">
+                    {{ __('These are all the members in your organization.') }}
+                </flux:text>
+                <table class="min-w-full border rounded-lg overflow-hidden">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2 text-left font-semibold">{{ __('Name') }}</th>
+                            <th class="px-4 py-2 text-left font-semibold">{{ __('Email') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($organization->users as $member)
+                            <tr>
+                                <td class="px-4 py-2">{{ $member->name }}</td>
+                                <td class="px-4 py-2">{{ $member->email }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             <div class="mb-6">
                 <flux:heading size="lg">
                     {{ __('General Settings') }}
