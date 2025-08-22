@@ -89,14 +89,24 @@ new class extends Component {
                 </header>
                 <flux:table class="mt-4">
                     <flux:table.columns>
-                        <flux:table.column>{{ __('Name') }}</flux:table.column>
-                        <flux:table.column>{{ __('Email address') }}</flux:table.column>
+                        <flux:table.column>{{ __('Member') }}</flux:table.column>
                     </flux:table.columns>
                     <flux:table.rows>
                         @foreach ($organization->members as $member)
                             <flux:table.row>
-                                <flux:table.cell>{{ $member->name }}</flux:table.cell>
-                                <flux:table.cell>{{ $member->email }}</flux:table.cell>
+                                <flux:table.cell>
+                                    <div class="flex items-center gap-2 sm:gap-4">
+                                        <flux:avatar :name="$member->name" class="max-sm:size-8" circle />
+                                        <div class="flex flex-col">
+                                            <flux:heading>{{ $member->name }}
+                                                @if (auth()->id() === $member->id)
+                                                    <flux:badge size="sm" color="blue" class="ml-1 max-sm:hidden">{{ __('You') }}</flux:badge>
+                                                @endif
+                                            </flux:heading>
+                                            <flux:text class="max-sm:hidden">{{ $member->email }}</flux:text>
+                                        </div>
+                                    </div>
+                                </flux:table.cell>
                             </flux:table.row>
                         @endforeach
                     </flux:table.rows>
