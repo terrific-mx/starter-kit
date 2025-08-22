@@ -10,6 +10,46 @@ use App\Notifications\OrganizationInvitation as OrganizationInvitationNotificati
 
 uses(RefreshDatabase::class);
 
+it('allows the owner to remove a member from their organization', function () {
+    $owner = User::factory()->withPersonalOrganization()->create();
+    $organization = Organization::factory()->for($owner)->create();
+    $member = User::factory()->create();
+    $organization->members()->attach($member);
+
+    Volt::actingAs($owner)
+        ->test('organizations.settings.members', ['organization' => $organization])
+        ->call('removeMember', $member)
+        ->assertHasNoErrors();
+
+    expect($organization->members()->find($member->id))->toBeNull();
+});
+
+it('forbids removing members from another organization', function () {
+    $owner = User::factory()->withPersonalOrganization()->create();
+    $organizationA = Organization::factory()->for($owner)->create();
+    $organizationB = Organization::factory()->create();
+    $member = User::factory()->create();
+    $organizationB->members()->attach($member);
+
+    Volt::actingAs($owner)
+        ->test('organizations.settings.members', ['organization' => $organizationA])
+        ->call('removeMember', $member)
+        ->assertForbidden();
+});
+
+it('forbids non-owners from removing organization members', function () {
+    $owner = User::factory()->withPersonalOrganization()->create();
+    $organization = Organization::factory()->for($owner)->create();
+    $nonOwner = User::factory()->create();
+    $member = User::factory()->create();
+    $organization->members()->attach($member);
+
+    Volt::actingAs($nonOwner)
+        ->test('organizations.settings.members', ['organization' => $organization])
+        ->call('removeMember', $member)
+        ->assertForbidden();
+});
+
 it('invites a member to an organization by email', function () {
     Notification::fake();
     $owner = User::factory()->withPersonalOrganization()->create();
