@@ -37,6 +37,11 @@ class Organization extends Model
         $this->members()->detach($user->id);
     }
 
+    public function isMember(User $user): bool
+    {
+        return $this->members->contains($user);
+    }
+
     public function inviteMember(string $email): OrganizationInvitation
     {
         return $this->invitations()->create([
