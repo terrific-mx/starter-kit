@@ -1,15 +1,93 @@
+<?php
+
+use Livewire\Volt\Component;
+use App\Models\Organization;
+use App\Models\OrganizationInvitation;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\OrganizationInvitation as OrganizationInvitationNotification;
+use Flux\Flux;
+use Illuminate\Validation\Rule;
+
+new class extends Component {
+    public Organization $organization;
+    public Collection $invitations;
+
+    public string $email = '';
+
+    public function mount()
+    {
+        $this->invitations = $this->getInvitations();
+    }
+
+    public function rules(): array
+    {
+        return [
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('organization_invitations', 'email')->where(
+                    fn ($query) => $query->where('organization_id', $this->organization->id)
+                ),
+            ],
+        ];
+    }
+
+    public function sendInvitation()
+    {
+        $this->authorize('invite', $this->organization);
+
+        $this->validate();
+
+        $invitation = $this->organization->inviteMember($this->email);
+
+        Notification::route('mail', $this->email)
+            ->notify(new OrganizationInvitationNotification($invitation));
+
+        Flux::toast(
+            heading: __('Invitation sent'),
+            text: __('The invitation was sent to :email.', ['email' => $this->email]),
+            variant: 'success'
+        );
+
+        $this->reset('email');
+
+        $this->invitations = $this->getInvitations();
+    }
+
+    private function getInvitations(): Collection
+    {
+        return $this->organization->invitations()->latest()->get();
+    }
+
+    public function revokeInvitation(OrganizationInvitation $invitation): void
+    {
+        $this->authorize('revoke', $invitation);
+
+        $invitation->delete();
+
+        Flux::toast(
+            heading: __('Invitation revoked'),
+            text: __('The invitation for :email was revoked.', ['email' => $invitation->email]),
+            variant: 'success'
+        );
+
+        $this->invitations = $this->getInvitations();
+    }
+}; ?>
+
 <div>
     @include('partials.organization-settings-breadcrumbs', ['organization' => $organization, 'current' => __('Members')])
     @include('partials.organization-settings-heading')
     <div class="flex flex-col lg:flex-row gap-8">
         @include('partials.organization-settings-sidebar', ['organization' => $organization])
         <div class="flex-1">
-            <section class="max-w-lg space-y-4">
+            <section class="max-w-lg">
                 <header>
                     <flux:heading size="lg">{{ __('Organization Members') }}</flux:heading>
-                    <flux:text>{{ __('These are all the members in your organization.') }}</flux:text>
+                    <flux:text class="mt-1">{{ __('These are all the members in your organization.') }}</flux:text>
                 </header>
-                <flux:table>
+                <flux:table class="mt-4">
                     <flux:table.columns>
                         <flux:table.column>{{ __('Name') }}</flux:table.column>
                         <flux:table.column>{{ __('Email address') }}</flux:table.column>
@@ -24,12 +102,12 @@
                     </flux:table.rows>
                 </flux:table>
             </section>
-            <section class="mt-8 space-y-4 max-w-lg">
+            <section class="mt-8">
                 <header>
                     <flux:heading size="lg">{{ __('Invite Member') }}</flux:heading>
-                    <flux:text>{{ __('Invite a new member to your organization by entering their email address below.') }}</flux:text>
+                    <flux:text class="mt-1">{{ __('Invite a new member to your organization by entering their email address below.') }}</flux:text>
                 </header>
-                <form wire:submit="sendInvitation" class="space-y-4">
+                <form wire:submit="sendInvitation" class="max-w-lg space-y-4 mt-4">
                     <flux:field>
                         <flux:label>{{ __('Email address') }}</flux:label>
                         <flux:input.group>
@@ -47,18 +125,18 @@
                     </flux:field>
                 </form>
             </section>
-            <section class="mt-8 space-y-4 max-w-lg">
+            <section class="max-w-lg mt-8">
                 <header>
                     <flux:heading size="lg">{{ __('Pending Invitations') }}</flux:heading>
-                    <flux:text>{{ __('These are the invitations you have sent to join your organization. You can manage them here.') }}</flux:text>
+                    <flux:text class="mt-1">{{ __('These are the invitations you have sent to join your organization. You can manage them here.') }}</flux:text>
                 </header>
-                <div>
+                <div class="mt-4">
                     @if ($invitations->isEmpty())
-                        <div class="flex flex-col items-center justify-center py-8 space-y-4">
+                        <div class="flex flex-col items-center justify-center py-8">
                             <flux:text>
-                                <flux:icon name="user-plus" variant="mini" />
+                                <flux:icon name="user-plus" variant="mini" class="mb-4" />
                             </flux:text>
-                            <flux:heading size="md">{{ __('No pending invitations') }}</flux:heading>
+                            <flux:heading size="md" class="mb-1">{{ __('No pending invitations') }}</flux:heading>
                             <flux:text>{{ __('You haven\'t sent any invitations yet.') }}</flux:text>
                         </div>
                     @else
