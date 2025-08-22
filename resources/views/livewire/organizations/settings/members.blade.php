@@ -152,16 +152,14 @@ new class extends Component {
                     @else
                         <flux:table>
                             <flux:table.columns>
-                                <flux:table.column>{{ __('Email address') }}</flux:table.column>
-                                <flux:table.column>{{ __('Status') }}</flux:table.column>
+                                <flux:table.column>{{ __('Invitation') }}</flux:table.column>
+
                             </flux:table.columns>
                             <flux:table.rows>
                                 @foreach ($invitations as $invitation)
                                     <flux:table.row>
                                         <flux:table.cell>{{ $invitation->email }}</flux:table.cell>
-                                        <flux:table.cell>
-                                            <flux:badge color="zinc" size="sm">{{ __('Pending') }}</flux:badge>
-                                        </flux:table.cell>
+
                                         <flux:table.cell align="end">
                                             <flux:button color="danger" variant="subtle" size="sm" wire:click="revokeInvitation({{ $invitation->id }})">
                                                 {{ __('Revoke') }}
