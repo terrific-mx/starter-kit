@@ -18,6 +18,7 @@ it('allows a user to accept an organization invitation and join', function () {
     $response = actingAs($invitedUser)->get($signedUrl);
 
     expect($organization->members()->where('user_id', $invitedUser->id)->exists())->toBeTrue();
+    expect($invitedUser->refresh()->currentOrganization->is($organization))->toBeTrue();
     expect(OrganizationInvitation::find($invitation->id))->toBeNull();
     $response->assertRedirect(route('dashboard'));
 });

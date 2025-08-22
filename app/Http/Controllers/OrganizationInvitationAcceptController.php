@@ -17,6 +17,7 @@ class OrganizationInvitationAcceptController extends Controller
 
         $organization->addMember($user);
         $invitation->delete();
+        $user->switchOrganization($organization);
 
         return redirect()->route('dashboard');
     }
