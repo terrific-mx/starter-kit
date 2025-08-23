@@ -18,10 +18,12 @@ it('sets current_organization_id to null when a member is removed from their cur
     $organization->addMember($member);
     $member->switchOrganization($organization);
     expect($organization->is($member->currentOrganization))->toBeTrue();
+
     Volt::actingAs($owner)
         ->test('organizations.settings.members', ['organization' => $organization])
         ->call('removeMember', $member)
         ->assertHasNoErrors();
+
     $member->refresh();
     expect($member->currentOrganization)->toBeNull();
 });
