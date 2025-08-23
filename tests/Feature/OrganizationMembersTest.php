@@ -13,7 +13,7 @@ uses(RefreshDatabase::class);
 it('nullifies currentOrganization when a member is removed from their current organization', function () {
     $owner = User::factory()->withPersonalOrganization()->create();
     $organization = Organization::factory()->for($owner)->create();
-    $member = User::factory()->create();
+    $member = User::factory()->withPersonalOrganization()->create();
 
     $organization->addMember($member);
     $member->switchOrganization($organization);
