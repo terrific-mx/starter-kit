@@ -10,7 +10,7 @@ use App\Notifications\OrganizationInvitation as OrganizationInvitationNotificati
 
 uses(RefreshDatabase::class);
 
-it('sets current_organization_id to null when a member is removed from their current organization', function () {
+it('nullifies currentOrganization when a member is removed from their current organization', function () {
     $owner = User::factory()->withPersonalOrganization()->create();
     $organization = Organization::factory()->for($owner)->create();
     $member = User::factory()->create();
