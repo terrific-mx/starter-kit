@@ -113,49 +113,51 @@ new class extends Component {
                     <flux:text class="mt-1">{{ __('These are all the members in your organization.') }}</flux:text>
                 </header>
                 <div class="mt-4">
-                    @if ($members->isEmpty())
-                        <div class="flex flex-col items-center justify-center py-8">
-                            <flux:text>
-                                <flux:icon name="user" variant="mini" class="mb-4" />
-                            </flux:text>
-                            <flux:heading size="md" class="mb-1">{{ __('No organization members') }}</flux:heading>
-                            <flux:text class="mt-1">
-                                {{ __('Invite someone to join your organization by sending them an invitation below.') }}
-                            </flux:text>
-                        </div>
-                    @else
-                        <flux:table>
-                            <flux:table.columns>
-                                <flux:table.column>{{ __('Member') }}</flux:table.column>
-                            </flux:table.columns>
-                            <flux:table.rows>
-                                @foreach ($members as $member)
-                                    <flux:table.row>
-                                        <flux:table.cell>
-                                            <div class="flex items-center gap-2 sm:gap-4">
-                                                <flux:avatar :name="$member->name" class="max-sm:size-8" circle />
-                                                <div class="flex flex-col">
-                                                    <flux:heading>{{ $member->name }}
-                                                        @if (auth()->id() === $member->id)
-                                                            <flux:badge size="sm" color="blue" class="ml-1 max-sm:hidden">{{ __('You') }}</flux:badge>
-                                                        @endif
-                                                    </flux:heading>
-                                                    <flux:text class="max-sm:hidden">{{ $member->email }}</flux:text>
-                                                </div>
+                    <flux:table>
+                        <flux:table.columns>
+                            <flux:table.column>{{ __('Member') }}</flux:table.column>
+                        </flux:table.columns>
+                        <flux:table.rows>
+                            <flux:table.row>
+                                <flux:table.cell>
+                                    <div class="flex items-center gap-2 sm:gap-4">
+                                        <flux:avatar :name="$organization->user->name" class="max-sm:size-8" circle />
+                                        <div class="flex flex-col">
+                                            <flux:heading>{{ $organization->user->name }}
+                                                <flux:badge size="sm" color="yellow" class="ml-1 max-sm:hidden">{{ __('Owner') }}</flux:badge>
+                                            </flux:heading>
+                                            <flux:text class="max-sm:hidden">{{ $organization->user->email }}</flux:text>
+                                        </div>
+                                    </div>
+                                </flux:table.cell>
+                                <flux:table.cell align="end">
+                                    <!-- Owner cannot be removed -->
+                                </flux:table.cell>
+                            </flux:table.row>
+                            @foreach ($members as $member)
+                                <flux:table.row>
+                                    <flux:table.cell>
+                                        <div class="flex items-center gap-2 sm:gap-4">
+                                            <flux:avatar :name="$member->name" class="max-sm:size-8" circle />
+                                            <div class="flex flex-col">
+                                                <flux:heading>{{ $member->name }}
+                                                    @if (auth()->id() === $member->id)
+
+                                                    @endif
+                                                </flux:heading>
+                                                <flux:text class="max-sm:hidden">{{ $member->email }}</flux:text>
                                             </div>
-                                        </flux:table.cell>
-                                        <flux:table.cell align="end">
-                                            @if (auth()->id() !== $member->id)
-                                                <flux:button variant="subtle" size="sm" wire:click="removeMember({{ $member->id }})">
-                                                    {{ __('Remove') }}
-                                                </flux:button>
-                                            @endif
-                                        </flux:table.cell>
-                                    </flux:table.row>
-                                @endforeach
-                            </flux:table.rows>
-                        </flux:table>
-                    @endif
+                                        </div>
+                                    </flux:table.cell>
+                                    <flux:table.cell align="end">
+                                        <flux:button variant="subtle" size="sm" wire:click="removeMember({{ $member->id }})">
+                                            {{ __('Remove') }}
+                                        </flux:button>
+                                    </flux:table.cell>
+                                </flux:table.row>
+                            @endforeach
+                        </flux:table.rows>
+                    </flux:table>
                 </div>
             </section>
             <section class="mt-8">
