@@ -10,6 +10,22 @@ use App\Notifications\OrganizationInvitation as OrganizationInvitationNotificati
 
 uses(RefreshDatabase::class);
 
+it('sets current_organization_id to null when a member is removed from their current organization', function () {
+    $owner = User::factory()->withPersonalOrganization()->create();
+    $organization = Organization::factory()->for($owner)->create();
+    $member = User::factory()->create();
+
+    $organization->addMember($member);
+    $member->switchOrganization($organization);
+    expect($organization->is($member->currentOrganization))->toBeTrue();
+    Volt::actingAs($owner)
+        ->test('organizations.settings.members', ['organization' => $organization])
+        ->call('removeMember', $member)
+        ->assertHasNoErrors();
+    $member->refresh();
+    expect($member->currentOrganization)->toBeNull();
+});
+
 it('allows the owner to remove a member from their organization', function () {
     $owner = User::factory()->withPersonalOrganization()->create();
     $organization = Organization::factory()->for($owner)->create();
