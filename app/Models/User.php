@@ -73,7 +73,7 @@ class User extends Authenticatable
         if (is_null($this->current_organization_id)) {
             $this->assignPersonalOrganizationAsCurrent();
 
-            $this->refresh();
+            $this->fresh();
         }
 
         return $this->belongsTo(Organization::class, 'current_organization_id');

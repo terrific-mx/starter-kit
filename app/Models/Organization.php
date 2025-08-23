@@ -35,6 +35,11 @@ class Organization extends Model
     public function removeMember(User $user): void
     {
         $this->members()->detach($user->id);
+
+        if ($user->current_organization_id === $this->id) {
+            $user->current_organization_id = null;
+            $user->save();
+        }
     }
 
     public function isMember(User $user): bool
