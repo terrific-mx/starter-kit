@@ -46,27 +46,6 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the user has an active subscription.
-     */
-    public function withSubscription(array $overrides = []): static
-    {
-        return $this->afterCreating(function ($user) use ($overrides) {
-            $subscription = Subscription::factory()
-                ->for($user)
-                ->state($overrides)
-                ->create();
-
-            SubscriptionItem::factory()
-                ->for($subscription)
-                ->state([
-                    'stripe_price' => config('services.stripe.price_id'),
-                    'quantity' => 1,
-                ])
-                ->create();
-        });
-    }
-
-    /**
      * Indicate that the user has a personal organization and sets it as current.
      */
     public function withPersonalOrganization(array $overrides = []): static
@@ -78,6 +57,39 @@ class UserFactory extends Factory
                     'personal' => true,
                     'name' => $user->name,
                 ], $overrides))
+                ->create();
+        });
+    }
+
+    /**
+     * Indicate that the user has a personal organization with an active subscription.
+     */
+    public function withPersonalOrganizationAndSubscription(array $orgOverrides = [], array $subOverrides = [], array $itemOverrides = []): static
+    {
+        return $this->afterCreating(function ($user) use ($orgOverrides, $subOverrides, $itemOverrides) {
+            $organization = Organization::factory()
+                ->state(array_merge([
+                    'user_id' => $user->id,
+                    'personal' => true,
+                    'name' => $user->name,
+                ], $orgOverrides))
+                ->create();
+
+            $subscription = Subscription::factory()
+                ->state(array_merge([
+                    'organization_id' => $organization->id,
+                    'type' => 'default',
+                    'stripe_id' => 'sub_' . Str::random(24),
+                    'stripe_status' => 'active',
+                ], $subOverrides))
+                ->create();
+
+            SubscriptionItem::factory()
+                ->state(array_merge([
+                    'subscription_id' => $subscription->id,
+                    'stripe_price' => config('services.stripe.price_id'),
+                    'quantity' => 1,
+                ], $itemOverrides))
                 ->create();
         });
     }

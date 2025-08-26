@@ -8,7 +8,7 @@ it('redirects guests to the login page', function () {
 });
 
 test('authenticated users can visit the dashboard', function () {
-    $user = User::factory()->withSubscription()->withPersonalOrganization()->create();
+    $user = User::factory()->withPersonalOrganizationAndSubscription()->create();
     $this->actingAs($user);
 
     $response = $this->get('/dashboard');

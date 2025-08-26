@@ -8,11 +8,11 @@ use function Pest\Laravel\actingAs;
 uses(RefreshDatabase::class);
 
 it('redirects unsubscribed users to the subscription-required page when accessing protected routes', function () {
-    $user = User::factory()->create([
+    $user = User::factory()->withPersonalOrganization()->create([
         'email_verified_at' => now(),
     ]);
 
-    expect($user->subscribed())->toBeFalse();
+    expect($user->currentOrganization->subscribed())->toBeFalse();
 
     actingAs($user)
         ->get('/dashboard')
