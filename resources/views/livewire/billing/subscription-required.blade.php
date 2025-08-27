@@ -33,6 +33,9 @@ new #[Layout('components.layouts.auth')] class extends Component {
 }; ?>
 
 <div class="mt-4 flex flex-col gap-6">
+    <div class="flex justify-center">
+        <livewire:organizations-dropdown />
+    </div>
     <flux:text class="text-center">
         {{ __('You need to subscribe to our service to continue.') }}
     </flux:text>
