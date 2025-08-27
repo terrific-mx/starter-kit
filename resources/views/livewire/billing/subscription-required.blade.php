@@ -8,7 +8,7 @@ use App\Livewire\Actions\Logout;
 new #[Layout('components.layouts.auth')] class extends Component {
     public function mount()
     {
-        if (Auth::user()?->subscribed('default')) {
+        if (Auth::user()?->currentOrganization->subscribed('default')) {
             $this->redirect(route('dashboard'), navigate: true);
         }
     }
@@ -17,7 +17,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
     {
         $stripePriceId = config('services.stripe.price_id');
 
-        $this->redirect(Auth::user()->newSubscription('default', $stripePriceId)
+        $this->redirect(Auth::user()->currentOrganization->newSubscription('default', $stripePriceId)
             ->trialDays(31)
             ->checkout([
                 'success_url' => route('settings.profile'),
