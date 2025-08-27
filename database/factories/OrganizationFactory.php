@@ -32,7 +32,7 @@ class OrganizationFactory extends Factory
     {
         return $this->afterCreating(function ($organization) use ($overrides) {
             $subscription = Subscription::factory()
-                ->for($organization)
+                ->for($organization, 'owner')
                 ->state($overrides)
                 ->create();
 

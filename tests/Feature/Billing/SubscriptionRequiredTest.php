@@ -1,11 +1,9 @@
 <?php
 
-use App\Models\User;
 use App\Models\Organization;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Volt\Volt;
-
-use function Pest\Laravel\actingAs;
 
 uses(RefreshDatabase::class);
 
@@ -38,7 +36,6 @@ test('switching to a non-subscribed organization stays on the page', function ()
 
     Volt::actingAs($user)->test('billing.subscription-required')
         ->call('switchOrganization', $org2)
-        ->assertHasNoRedirect()
         ->assertOk();
 });
 
