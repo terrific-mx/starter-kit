@@ -22,3 +22,10 @@ The section titles are in the imperative mood
 The section titles should not repeat the term used in the page title, for
 example, if the page title is "Models", avoid using a section title like "Add
 new models". This might be unavoidable in some cases, but try to avoid it.
+
+Check out the /packages/web/src/content/docs/docs/index.mdx as an example.
+
+For JS or TS code snippets remove trailing semicolons and any trailing commas
+that might not be needed.
+
+If you are making a commit prefix the commit message with `docs:`
