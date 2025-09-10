@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Collection;
 new class extends Component {
     public ?Organization $currentOrganization;
     public Collection $organizations;
-
     public ?int $selectedOrganizationId;
 
     #[Computed]
@@ -20,16 +19,14 @@ new class extends Component {
     public function mount()
     {
         $this->currentOrganization = $this->user->currentOrganization;
-        $this->organizations = $this->user->organizations;
+        $this->organizations = $this->user->allOrganizations();
         $this->selectedOrganizationId = $this->currentOrganization?->id;
     }
 
     public function switchOrganization(Organization $organization)
     {
         $this->authorize('switch', $organization);
-
         $this->user->switchOrganization($organization);
-
         $this->redirectRoute('dashboard', navigate: true);
     }
 

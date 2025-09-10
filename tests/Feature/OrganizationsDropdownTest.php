@@ -20,6 +20,23 @@ it('allows user to switch organizations from the dropdown', function () {
     expect($user->fresh()->currentOrganization->is($orgB))->toBeTrue();
 });
 
+it('allows user to switch to an organization they are a member of', function () {
+    $owner = User::factory()->create();
+    $member = User::factory()->create();
+    $org = Organization::factory()->for($owner)->create();
+    $org->addMember($member);
+
+    $member->switchOrganization($org);
+    expect($member->fresh()->currentOrganization->is($org))->toBeTrue();
+
+    Volt::actingAs($member)
+        ->test('organizations-dropdown')
+        ->call('switchOrganization', $org->id)
+        ->assertRedirect(route('dashboard'));
+
+    expect($member->fresh()->currentOrganization->is($org))->toBeTrue();
+});
+
 it('prevents user from switching to an organization they do not own', function () {
     $user = User::factory()->has(Organization::factory()->count(2))->create();
     $orgA = $user->organizations->first();
