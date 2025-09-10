@@ -23,7 +23,8 @@ class OrganizationPolicy
      */
     public function switch(User $user, Organization $organization): bool
     {
-        return $user->organizations->contains($organization);
+        return $user->organizations->contains($organization)
+            || $organization->members->contains($user);
     }
 
     /**
