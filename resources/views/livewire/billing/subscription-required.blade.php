@@ -19,7 +19,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
     public function mount()
     {
-        $this->organizations = $this->user->organizations;
+        $this->organizations = $this->user->allOrganizations();
         $this->selectedOrganizationId = $this->user->currentOrganization?->id;
 
         if ($this->user->currentOrganization->subscribed('default')) {

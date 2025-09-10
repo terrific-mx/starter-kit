@@ -66,6 +66,25 @@ class User extends Authenticatable
     }
 
     /**
+     * Organizations where the user is a member (not owner).
+     */
+    public function memberOrganizations()
+    {
+        return $this->belongsToMany(Organization::class, 'organization_user');
+    }
+
+    /**
+     * All organizations the user owns or is a member of (unique).
+     */
+    public function allOrganizations()
+    {
+        return $this->organizations
+            ->merge($this->memberOrganizations)
+            ->unique('id')
+            ->values();
+    }
+
+    /**
      * Get the user's current organization.
      */
     public function currentOrganization()
