@@ -33,8 +33,11 @@ new class extends Component {
     }
 }; ?>
 
-<div>
+<x-slot:breadcrumbs>
     @include('partials.organization-settings-breadcrumbs', ['organization' => $organization, 'current' => __('General')])
+</x-slot:breadcrumbs>
+
+<div>
     @include('partials.organization-settings-heading')
     <div class="flex flex-col lg:flex-row gap-8">
         @include('partials.organization-settings-sidebar', ['organization' => $organization])
