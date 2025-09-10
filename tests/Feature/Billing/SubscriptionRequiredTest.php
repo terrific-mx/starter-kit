@@ -11,10 +11,8 @@ test('switching to a subscribed organization redirects to dashboard', function (
     /** @var User $user */
     $user = User::factory()->withPersonalOrganization()->create();
 
-    // Create a subscribed organization
     $subscribedOrg = Organization::factory()->for($user)->withSubscription()->create();
 
-    // Create an unsubscribed organization and set as current
     $unsubscribedOrg = Organization::factory()->for($user)->create();
     $user->switchOrganization($unsubscribedOrg);
 
@@ -27,11 +25,9 @@ test('switching to a non-subscribed organization stays on the page', function ()
     /** @var User $user */
     $user = User::factory()->withPersonalOrganization()->create();
 
-    // Create two unsubscribed organizations
     $org1 = Organization::factory()->for($user)->create();
     $org2 = Organization::factory()->for($user)->create();
 
-    // Set current to org1
     $user->switchOrganization($org1);
 
     Volt::actingAs($user)->test('billing.subscription-required')
@@ -39,15 +35,27 @@ test('switching to a non-subscribed organization stays on the page', function ()
         ->assertOk();
 });
 
-test('user cannot switch to an organization they do not own', function () {
+test('user can switch to an organization they are a member of', function () {
     /** @var User $user */
     $user = User::factory()->withPersonalOrganization()->create();
 
-    // Create another user and their organization
+    $org = Organization::factory()->create();
+    $org->addMember($user);
+
+    $user->switchOrganization($user->organizations->first());
+
+    Volt::actingAs($user)->test('billing.subscription-required')
+        ->call('switchOrganization', $org)
+        ->assertOk();
+});
+
+test('user cannot switch to an organization they neither own nor are a member of', function () {
+    /** @var User $user */
+    $user = User::factory()->withPersonalOrganization()->create();
+
     $otherUser = User::factory()->withPersonalOrganization()->create();
     $otherOrg = $otherUser->organizations->first();
 
-    // Set current to user's own org
     $user->switchOrganization($user->organizations->first());
 
     Volt::actingAs($user)->test('billing.subscription-required')
