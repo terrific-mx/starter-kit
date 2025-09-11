@@ -69,6 +69,10 @@ new class extends Component {
     }
 }; ?>
 
+<x-slot:breadcrumbs>
+    @include('partials.settings-breadcrumbs', ['current' => __('Profile')])
+</x-slot:breadcrumbs>
+
 <section class="w-full">
     @include('partials.settings-heading')
 
