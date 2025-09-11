@@ -37,6 +37,10 @@ new class extends Component {
     }
 }; ?>
 
+<x-slot:breadcrumbs>
+    @include('partials.settings-breadcrumbs', ['current' => __('Update password')])
+</x-slot:breadcrumbs>
+
 <section class="w-full">
     @include('partials.settings-heading')
 

@@ -6,6 +6,10 @@ new class extends Component {
     //
 }; ?>
 
+<x-slot:breadcrumbs>
+    @include('partials.settings-breadcrumbs', ['current' => __('Appearance')])
+</x-slot:breadcrumbs>
+
 <section class="w-full">
     @include('partials.settings-heading')
 
