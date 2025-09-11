@@ -21,13 +21,10 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
     Volt::route('organizations/{organization}/settings/members', 'organizations.settings.members')
-        ->middleware('can:update,organization')
         ->name('organizations.settings.members');
     Volt::route('organizations/{organization}/settings/general', 'organizations.settings.general')
-        ->middleware('can:update,organization')
         ->name('organizations.settings.general');
     Volt::route('organizations/{organization}', 'organizations.settings.general')
-        ->middleware('can:update,organization')
         ->name('organizations.show');
 
     Route::get('organizations/invitations/{invitation}/accept', OrganizationInvitationAcceptController::class)

@@ -54,16 +54,13 @@ it('forbids removing members from another organization', function () {
         ->assertForbidden();
 });
 
-it('forbids non-owners from removing organization members', function () {
+it('forbids non-owners from accessing the organization members component', function () {
     $owner = User::factory()->withPersonalOrganization()->create();
     $organization = Organization::factory()->for($owner)->create();
     $nonOwner = User::factory()->create();
-    $member = User::factory()->create();
-    $organization->members()->attach($member);
 
     Volt::actingAs($nonOwner)
         ->test('organizations.settings.members', ['organization' => $organization])
-        ->call('removeMember', $member)
         ->assertForbidden();
 });
 
@@ -120,20 +117,6 @@ it('requires the email to be unique for the organization', function () {
         ->assertHasErrors(['email' => 'unique']);
 });
 
-it('forbids non-owners from sending organization invitations', function () {
-    Notification::fake();
-    $owner = User::factory()->withPersonalOrganization()->create();
-    $organization = Organization::factory()->for($owner)->create();
-    $nonOwner = User::factory()->withPersonalOrganization()->create();
-    $inviteEmail = 'invitee@example.com';
-
-    Volt::actingAs($nonOwner)
-        ->test('organizations.settings.members', ['organization' => $organization])
-        ->set('email', $inviteEmail)
-        ->call('sendInvitation')
-        ->assertForbidden();
-});
-
 it('allows the owner to revoke a pending invitation', function () {
     $owner = User::factory()->create();
     $organization = Organization::factory()->for($owner)->create();
@@ -150,13 +133,13 @@ it('allows the owner to revoke a pending invitation', function () {
     expect($organization->invitations()->find($invitation->id))->toBeNull();
 });
 
-it('forbids non-owners from revoking invitations', function () {
-    $owner = User::factory()->withPersonalOrganization()->create();
+it('forbids revoking an invitation for another organization', function () {
+    $owner = User::factory()->create();
     $organization = Organization::factory()->for($owner)->create();
-    $nonOwner = User::factory()->withPersonalOrganization()->create();
-    $invitation = OrganizationInvitation::factory()->for($organization)->create();
+    $invitation = OrganizationInvitation::factory()->create();
+    expect($invitation->organization->isNot($organization))->toBeTrue();
 
-    Volt::actingAs($nonOwner)
+    Volt::actingAs($owner)
         ->test('organizations.settings.members', ['organization' => $organization])
         ->call('revokeInvitation', $invitation)
         ->assertForbidden();

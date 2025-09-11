@@ -11,11 +11,13 @@
                 <flux:sidebar.item icon="home" :href="route('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:sidebar.item>
             </flux:sidebar.nav>
 
-            <flux:sidebar.nav>
-                <flux:sidebar.group :heading="__('Organization')">
-                    <flux:sidebar.item :href="route('organizations.settings.general', auth()->user()->currentOrganization)" icon="cog-6-tooth" wire:navigate>{{ __('Settings') }}</flux:sidebar.item>
-                </flux:sidebar.group>
-            </flux:sidebar.nav>
+            @can('update', auth()->user()->currentOrganization)
+                <flux:sidebar.nav>
+                    <flux:sidebar.group :heading="__('Organization')">
+                        <flux:sidebar.item :href="route('organizations.settings.general', auth()->user()->currentOrganization)" icon="cog-6-tooth" wire:navigate>{{ __('Settings') }}</flux:sidebar.item>
+                    </flux:sidebar.group>
+                </flux:sidebar.nav>
+            @endcan
 
             <flux:sidebar.spacer />
 

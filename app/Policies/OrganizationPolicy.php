@@ -7,6 +7,11 @@ use App\Models\User;
 
 class OrganizationPolicy
 {
+    public function __construct()
+    {
+        //
+    }
+
     /**
      * Create a new policy instance.
      */
@@ -19,6 +24,14 @@ class OrganizationPolicy
     }
 
     /**
+     * Determine whether the user can update the organization.
+     */
+    public function update(User $user, Organization $organization): bool
+    {
+        return $organization->user->is($user);
+    }
+
+    /**
      * Determine whether the user can switch to the given organization.
      */
     public function switch(User $user, Organization $organization): bool
@@ -28,31 +41,10 @@ class OrganizationPolicy
     }
 
     /**
-     * Determine whether the user can update the organization.
+     * Determine whether the user can manage members of the organization.
      */
-    public function update(User $user, Organization $organization): bool
+    public function manageMembers(User $user, Organization $organization): bool
     {
         return $organization->user->is($user);
-    }
-
-    /**
-     * Determine whether the user can invite members to the organization.
-     */
-    public function invite(User $user, Organization $organization): bool
-    {
-        return $organization->user->is($user);
-    }
-
-    /**
-     * Determine whether the user can remove members from the organization.
-     */
-    public function removeMember(User $user, Organization $organization): bool
-    {
-        return $organization->user->is($user);
-    }
-
-    public function __construct()
-    {
-        //
     }
 }

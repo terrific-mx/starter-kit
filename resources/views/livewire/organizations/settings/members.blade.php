@@ -19,6 +19,8 @@ new class extends Component {
 
     public function mount()
     {
+        $this->authorize('manageMembers', $this->organization);
+
         $this->invitations = $this->getInvitations();
         $this->members = $this->getMembers();
     }
@@ -38,8 +40,6 @@ new class extends Component {
 
     public function sendInvitation()
     {
-        $this->authorize('invite', $this->organization);
-
         $this->validate();
 
         $invitation = $this->organization->inviteMember($this->email);
@@ -65,8 +65,6 @@ new class extends Component {
 
     public function removeMember(User $member): void
     {
-        $this->authorize('removeMember', $this->organization);
-
         abort_unless($this->organization->isMember($member), 403);
 
         $this->organization->removeMember($member);
