@@ -48,8 +48,6 @@ it('forbids non-owners from editing the organization name', function () {
 
     Volt::actingAs($nonOwner)
         ->test('organizations.settings.general', ['organization' => $organization])
-        ->set('name', 'Hacked Name')
-        ->call('edit')
         ->assertForbidden();
 
     expect($organization->fresh()->name)->toBe('Old Name');
@@ -59,7 +57,19 @@ it('returns a successful response for the organization details page', function (
     $user = User::factory()->create();
     $organization = Organization::factory()->for($user)->create();
 
-    actingAs($user)
-        ->get("/organizations/{$organization->id}")
-        ->assertSuccessful();
+    Volt::actingAs($user)
+        ->test('organizations.settings.general', ['organization' => $organization])
+        ->assertOk();
+});
+
+it('forbids organization members (non-owners) from accessing the organization details page', function () {
+    $owner = User::factory()->create();
+    $member = User::factory()->create();
+    $organization = Organization::factory()->for($owner)->create();
+    $organization->addMember($member);
+    $member->switchOrganization($organization);
+
+    Volt::actingAs($member)
+        ->test('organizations.settings.general', ['organization' => $organization])
+        ->assertForbidden();
 });
