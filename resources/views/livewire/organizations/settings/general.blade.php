@@ -41,14 +41,15 @@ new class extends Component {
 
 <div>
     @include('partials.organization-settings-heading')
-    <div class="flex flex-col lg:flex-row gap-8">
+    <div class="flex items-start max-md:flex-col">
         @include('partials.organization-settings-sidebar', ['organization' => $organization])
-        <div class="flex-1">
+        <flux:separator class="md:hidden" />
+        <div class="flex-1 self-stretch max-md:pt-6">
             <header>
-                <flux:heading size="lg">
+                <flux:heading>
                     {{ __('General Settings') }}
                 </flux:heading>
-                <flux:text class="mt-1">
+                <flux:text class="mt-2">
                     {{ __('Update your organization name below to keep your workspace up to date.') }}
                 </flux:text>
             </header>

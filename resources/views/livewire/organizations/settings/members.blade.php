@@ -105,13 +105,14 @@ new class extends Component {
 
 <div>
     @include('partials.organization-settings-heading')
-    <div class="flex flex-col lg:flex-row gap-8">
+    <div class="flex items-start max-md:flex-col">
         @include('partials.organization-settings-sidebar', ['organization' => $organization])
-        <div class="flex-1">
+        <flux:separator class="md:hidden" />
+        <div class="flex-1 self-stretch max-md:pt-6">
             <section class="max-w-lg">
                 <header>
-                    <flux:heading size="lg">{{ __('Organization Members') }}</flux:heading>
-                    <flux:text class="mt-1">{{ __('These are all the members in your organization.') }}</flux:text>
+                    <flux:heading>{{ __('Organization Members') }}</flux:heading>
+                    <flux:text class="mt-2">{{ __('These are all the members in your organization.') }}</flux:text>
                 </header>
                 <div class="mt-4">
                     <flux:table>
@@ -163,8 +164,8 @@ new class extends Component {
             </section>
             <section class="mt-8">
                 <header>
-                    <flux:heading size="lg">{{ __('Invite Member') }}</flux:heading>
-                    <flux:text class="mt-1">{{ __('Invite a new member to your organization by entering their email address below.') }}</flux:text>
+                    <flux:heading>{{ __('Invite Member') }}</flux:heading>
+                    <flux:text class="mt-2">{{ __('Invite a new member to your organization by entering their email address below.') }}</flux:text>
                 </header>
                 <form wire:submit="sendInvitation" class="max-w-lg space-y-4 mt-4">
                     <flux:field>
@@ -186,8 +187,8 @@ new class extends Component {
             </section>
             <section class="max-w-lg mt-8">
                 <header>
-                    <flux:heading size="lg">{{ __('Pending Invitations') }}</flux:heading>
-                    <flux:text class="mt-1">{{ __('These are the invitations you have sent to join your organization. You can manage them here.') }}</flux:text>
+                    <flux:heading>{{ __('Pending Invitations') }}</flux:heading>
+                    <flux:text class="mt-2">{{ __('These are the invitations you have sent to join your organization. You can manage them here.') }}</flux:text>
                 </header>
                 <div class="mt-4">
                     @if ($invitations->isEmpty())
