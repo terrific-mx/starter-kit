@@ -1,7 +1,6 @@
 <div class="me-10 w-full pb-4 md:w-[220px]">
     <flux:navlist>
         <flux:navlist.item
-            icon="cog-6-tooth"
             :href="route('organizations.settings.general', $organization)"
             :current="request()->routeIs('organizations.settings.general')"
             wire:navigate
@@ -9,7 +8,6 @@
             {{ __('General') }}
         </flux:navlist.item>
         <flux:navlist.item
-            icon="layout-grid"
             :href="route('organizations.settings.members', $organization)"
             :current="request()->routeIs('organizations.settings.members')"
             wire:navigate
